@@ -1,16 +1,38 @@
+from tkinter.constants import ACTIVE, FALSE
 import PySimpleGUI as sg
+from PySimpleGUI.PySimpleGUI import Window
 
 """
     Dashboard using blocks of information.
     Copyright 2020 PySimpleGUI.org
 """
 
-def dropDownController():
-    return [[sg.Text('Block 4', font='Any 20')],
-            [sg.Combo(['choice 1', 'choice 2'])],
-            [sg.T('This is some random text')],
-            [sg.T('This is some random text')],
-            [sg.T('This is some random text')]]
+showBox = [True, False, False]
+
+#test
+
+priceValues = ['egal', '<500€', '500-2000€', '>2000€']
+processorValues = ['1', '2', '3', '4']
+
+
+priceComboBox = sg.Combo(priceValues, enable_events=True, key='price')
+processorComboBox = sg.Combo(processorValues, enable_events=True, key='processor', visible=False)
+
+
+def dropDownController(window): 
+    if values['price'] == 'egal':
+        processorValues = ['1', '2', '3', '4']
+        window['processor'].update(values=processorValues)
+    else:
+        processorValues = ['1', '2', '3']           
+        processorComboBox = sg.Combo(processorValues, enable_events=True, key='hhhhhhhhhhhhhh', visible=True)     
+        window['processor'].update(values=processorValues)
+
+
+
+def manipulateValues():
+    if values['price']=='':
+        processorComboBox = sg.Combo(['1', '2', '3'], enable_events=True, key='processor')           
 
 
 theme_dict = {'BACKGROUND': '#2B475D',
@@ -36,7 +58,7 @@ BPAD_RIGHT = ((10,20), (10, 20))
 top_banner = [[sg.Text('Dashboard'+ ' '*64, font='Any 20', background_color=DARK_HEADER_COLOR),
                sg.Text('Tuesday 9 June 2020', font='Any 20', background_color=DARK_HEADER_COLOR)]]
 
-top  = [[sg.Text('The Weather Will Go Here', size=(50,1), justification='c', pad=BPAD_TOP, font='Any 20')],
+top  = [[sg.Text('Test', size=(50,1), justification='c', pad=BPAD_TOP, font='Any 20')],
             [sg.T(f'{i*25}-{i*34}') for i in range(7)],]
 
 block_3 = [[sg.Text('Block 3', font='Any 20')],
@@ -48,7 +70,17 @@ block_2 = [[sg.Text('Block 2', font='Any 20')],
             [sg.T('This is some random text')],
             [sg.Image(data=sg.DEFAULT_BASE64_ICON)]  ]
 
-block_4 = dropDownController()
+block_4 = [[sg.Text('Block 4', font='Any 20', key='textblockFour')],
+            [priceComboBox],
+            [processorComboBox],
+            #[sg.T('This is some random text')],
+            #[sg.T('This is some random text')]
+            ]
+
+
+
+
+
 
 
 
@@ -56,12 +88,17 @@ layout = [[sg.Column(top_banner, size=(960, 60), pad=(0,0), background_color=DAR
           [sg.Column(top, size=(920, 90), pad=BPAD_TOP)],
           [sg.Column([[sg.Column(block_2, size=(450,150), pad=BPAD_LEFT_INSIDE)],
                       [sg.Column(block_3, size=(450,150),  pad=BPAD_LEFT_INSIDE)]], pad=BPAD_LEFT, background_color=BORDER_COLOR),
-           sg.Column(block_4, size=(450, 320), pad=BPAD_RIGHT)]]
+           sg.Column(block_4, size=(450, 320), pad=BPAD_RIGHT, key="testtest")]]
 
-window = sg.Window('Dashboard PySimpleGUI-Style', layout, margins=(0,0), background_color=BORDER_COLOR, no_titlebar=True, grab_anywhere=True)
+window = sg.Window('Dashboard PySimpleGUI-Style', layout, margins=(0,0), background_color=BORDER_COLOR, no_titlebar=False, grab_anywhere=True)
 
 while True:             # Event Loop
     event, values = window.read()
+    
     if event == sg.WIN_CLOSED or event == 'Exit':
         break
+    else:
+        dropDownController(window)
+        
+
 window.close()

@@ -1,28 +1,17 @@
-from tkinter.constants import ACTIVE
+from ViewController import ViewController
+from AvailableOptionsModel import AvailableOptionsModel
+from tkinter.constants import ACTIVE, DISABLED, FALSE
 import PySimpleGUI as sg
 from PySimpleGUI.PySimpleGUI import Window
 
-"""
-    Dashboard using blocks of information.
-    Copyright 2020 PySimpleGUI.org
-"""
 
-showBox = [True, False, False]
+buttonNext = sg.Button('NEXT', image_size=(100, 50), image_subsample=4, border_width=10, key='buttonNext')
+testModel = AvailableOptionsModel()
+viewController = ViewController()
+
+buttonPressed = 0
 
 
-def dropDownController():    
-    priceComboBox = sg.Combo(['<500€', '500-2000€', '>2000€'], enable_events=True, key='price')
-    processorComboBox = sg.Combo(['1', '2', '3'], enable_events=True, key='processor')
-
-    if showBox[0] and values['price'] == '':
-        return [[sg.Text('Block 4', font='Any 20')],
-                [priceComboBox]]
-    else:
-        return [[sg.Text('Block 4', font='Any 20')],
-                [priceComboBox],
-                [processorComboBox]]
-
-           
 
 
 theme_dict = {'BACKGROUND': '#2B475D',
@@ -34,7 +23,6 @@ theme_dict = {'BACKGROUND': '#2B475D',
                 'PROGRESS': ('#FFFFFF', '#C7D5E0'),
                 'BORDER': 1,'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0}
 
-# sg.theme_add_new('Dashboard', theme_dict)     # if using 4.20.0.1+
 sg.LOOK_AND_FEEL_TABLE['Dashboard'] = theme_dict
 sg.theme('Dashboard')
 
@@ -45,42 +33,40 @@ BPAD_LEFT = ((20,10), (0, 10))
 BPAD_LEFT_INSIDE = (0, 10)
 BPAD_RIGHT = ((10,20), (10, 20))
 
-top_banner = [[sg.Text('Dashboard'+ ' '*64, font='Any 20', background_color=DARK_HEADER_COLOR),
-               sg.Text('Tuesday 9 June 2020', font='Any 20', background_color=DARK_HEADER_COLOR)]]
+leftColumn = [[sg.Text('Preis moderat', font='Any 12', key='textblockFour')],
+            [viewController.buttonOne],
+            [sg.Text('Preis güntig', font='Any 12', key='textblockFour')],
+            [viewController.buttonTwo],
+            ]
 
-top  = [[sg.Text('The Weather Will Go Here', size=(50,1), justification='c', pad=BPAD_TOP, font='Any 20')],
-            [sg.T(f'{i*25}-{i*34}') for i in range(7)],]
+rightColumn = [[sg.Text(testModel.category[3], font='Any 10', key='debugOptions')],
+            [buttonNext]            
+            ]
 
-block_3 = [[sg.Text('Block 3', font='Any 20')],
-            [sg.Input(), sg.Text('Some Text')],
-            [sg.Button('Go'), sg.Button('Exit')]  ]
+layout = [[sg.Column(leftColumn, size=(300, 600), pad=BPAD_LEFT, key="testtest")],
+        [sg.Column(rightColumn, size=(600,600), pad=BPAD_RIGHT)]
+        ]
 
-
-block_2 = [[sg.Text('Block 2', font='Any 20')],
-            [sg.T('This is some random text')],
-            [sg.Image(data=sg.DEFAULT_BASE64_ICON)]  ]
-
-block_4 = [[sg.Text('Block 4', font='Any 20')],
-            [sg.Combo(['<500', '500-2000', '>2000'], enable_events=True, key='price')],
-            #[sg.Combo(['1', '2', '3'], enable_events=True, key='processor', visible=True)],
-            [sg.T('This is some random text')],
-            [sg.T('This is some random text')]]
-
-
-
-
-layout = [[sg.Column(top_banner, size=(960, 60), pad=(0,0), background_color=DARK_HEADER_COLOR)],
-          [sg.Column(top, size=(920, 90), pad=BPAD_TOP)],
-          [sg.Column([[sg.Column(block_2, size=(450,150), pad=BPAD_LEFT_INSIDE)],
-                      [sg.Column(block_3, size=(450,150),  pad=BPAD_LEFT_INSIDE)]], pad=BPAD_LEFT, background_color=BORDER_COLOR),
-           sg.Column(block_4, size=(450, 320), pad=BPAD_RIGHT)]]
-
-window = sg.Window('Dashboard PySimpleGUI-Style', layout, margins=(0,0), background_color=BORDER_COLOR, no_titlebar=True, grab_anywhere=True)
+window = sg.Window('Dashboard PySimpleGUI-Style', layout, margins=(0,0), background_color=BORDER_COLOR, no_titlebar=False, grab_anywhere=True)
 
 while True:             # Event Loop
     event, values = window.read()
-    block_4 = dropDownController()
-
+    
     if event == sg.WIN_CLOSED or event == 'Exit':
         break
+    elif event == 'buttonOne':
+        buttonPressed = 1
+        testModel.changeSelection('price', 0)
+        #window['debugOptions'].update(testModel.printArray())
+    elif event == 'buttonTwo':
+        buttonPressed = 2
+        testModel.changeSelection('price', 1)
+        #window['debugOptions'].update(testModel.printArray())
+    elif event == 'buttonNext':
+        viewController.clickNextButton(buttonPressed)
+        window['buttonOne'].update(image_data=viewController.updateButtonIcon(1))
+        window['buttonTwo'].update(image_data=viewController.updateButtonIcon(2))
+        window['buttonOne'].update(disabled=viewController.updateOptions(1))
+        window['buttonTwo'].update(disabled=viewController.updateOptions(2))       
+
 window.close()
