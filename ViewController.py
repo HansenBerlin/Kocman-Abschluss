@@ -1,21 +1,21 @@
 from ImageData import ImageData
 from AvailableOptionsModel import AvailableOptionsModel
-from inspect import currentframe
-import PySimpleGUI as gui
 
 class ViewController(object):    
 
     def __init__(self):   
-        self.imageData = ImageData()     
-        self.buttonOne = gui.Button('', image_data=self.imageData.price, border_width=2, key='buttonOne')
-        self.buttonTwo = gui.Button('', image_data=self.imageData.price, border_width=2, key='buttonTwo')
-        self.buttonThree = gui.Button('', image_data=self.imageData.price, border_width=2, key='buttonThree')
+        self.imageData = ImageData()  
         self.currentPage = 1
         self.availableOptionsData = AvailableOptionsModel()   
 
 
-    def clickNextButton(self, buttonClicked):
+    def updatePageAndElementsOnNextButtonClick(self, buttonClicked):
         self.currentPage+=1
+        self.updateAvailableOptions(buttonClicked)
+
+
+    def updatePageAndElementsOnPreviousButtonClick(self, buttonClicked):
+        self.currentPage-=1
         self.updateAvailableOptions(buttonClicked)
 
 
@@ -24,7 +24,7 @@ class ViewController(object):
             if button == 1: return self.imageData.categories
 
 
-    def updateOptions(self, button):
+    def updateButtonState(self, button):
         print(self.availableOptionsData.allOptions[self.currentPage-1][3][button-1])
         return self.availableOptionsData.allOptions[self.currentPage-1][3][button-1]
 
@@ -32,9 +32,11 @@ class ViewController(object):
     def updateAvailableOptions(self, buttonClicked):
         if self.currentPage == 2:
             if(buttonClicked == 1):
-                self.availableOptionsData.category[3] = [True, True, True, True, True]
+                self.availableOptionsData.category[3] = [False, True, True]
             elif(buttonClicked == 2):
-                self.availableOptionsData.category[3] = [False, True, True, True, True]
+                self.availableOptionsData.category[3] = [False, False, True]
+            elif(buttonClicked == 3):
+                self.availableOptionsData.category[3] = [False, False, False]
          
 
 

@@ -3,44 +3,41 @@ from AvailableOptionsModel import AvailableOptionsModel
 from ImageData import ImageData
 import PySimpleGUI as gui
 
-buttonNext = gui.Button('NEXT', size=(30,5), border_width=2, key='buttonNext')
 testModel = AvailableOptionsModel()
 viewController = ViewController()
+imageData = ImageData()  
 
-imageData = ImageData()     
-buttonOne = gui.Button('', image_data=imageData.price, border_width=2, key='buttonOne')
-buttonTwo = gui.Button('', image_data=imageData.price, border_width=2, key='buttonTwo')
-buttonThree = gui.Button('', image_data=imageData.price, border_width=2, key='buttonThree')
+buttonPrevious = gui.Button('PREVOUS', image_data=imageData.buttonPrevious, size=(14,1.0), key='buttonPrevious', button_color=('white', '#66bb6a'), pad=([80,40],[0,0]))
+buttonNext = gui.Button('NEXT', image_data=imageData.buttonNext, size=(14,1.0), key='buttonNext', button_color=('white', '#66bb6a'))
+buttonOne = gui.Button('',   image_data=imageData.buttonUsedForOne, key='buttonOne',   button_color=('white', '#66bb6a'), pad=([81,26],[0,0]))
+buttonTwo = gui.Button('',   image_data=imageData.buttonUsedForTwo, key='buttonTwo',   button_color=('white', '#66bb6a'), pad=([0,26],[0,0]))
+buttonThree = gui.Button('', image_data=imageData.buttonUsedForThree, key='buttonThree', button_color=('white', '#66bb6a'))
 
-headerTextButtonOne = gui.Text('Preis günstig', font='Fixedsys 12', key='textAboveButtonOne')
-headerTextButtonTwo = gui.Text('Preis moderat', font='Fixedsys 12', key='textAboveButtonTwo')
-headerTextButtonThree = gui.Text('Preis egal', font='Fixedsys 12', key='textAboveButtonThree')
+infoTextButtonOne =   gui.Text('Office: \n \nOfficeenwendungen \nInternetnutzung \nWebdesign \n \n', font='Consolas 10', background_color='#cee1cf', text_color='black', key='textInfoButtonOne', pad=([81,0],[20,50]))
+infoTextButtonTwo =   gui.Text('Gaming: \n \nwie Office plus: \nGaming \nVR \nBild- und \nVideobearbeitung', font='Consolas 10', background_color='#cee1cf', text_color='black', key='textInfoButtonTwo', pad=([0,26],[20,50]))
+infoTextButtonThree =   gui.Text('Professional: \n \nEntwicklung \nMachine Learning \nWorkstation \nBild- und \nVideobearbeitung', font='Consolas 10', background_color='#cee1cf', text_color='black', key='textInfoButtonThree', pad=([0,0],[20,50]))
 
-infoTextButtonOne = gui.Text('Info1', font='Fixedsys 12', key='textInfoButtonOne')
-infoTextButtonTwo = gui.Text('Info2', font='Fixedsys 12', key='textInfoButtonTwo')
-infoTextButtonThree = gui.Text('Info3', font='Fixedsys 12', key='textInfoButtonThree')
+headingLeftColumn = gui.Text('Auswahl: Anwendungsgebiet', background_color='#66bb6a', border_width=15, size=(37,1), justification='center', key='headingLeftColumn', pad=([81,0],[35,25]))
 
 buttonPressed = 0
 
-gui.theme('Dashboard')
+gui.SetOptions(background_color='#cee1cf',      
+       use_ttk_buttons=True,
+       button_color=('white', '#66bb6a'),
+       text_color='black')
 
-BORDER_COLOR = '#C7D5E0'
-DARK_HEADER_COLOR = '#1B2838'
-BPAD_TOP = ((20,20), (20, 10))
-BPAD_LEFT = ((20,10), (0, 10))
-BPAD_LEFT_INSIDE = (0, 10)
-BPAD_RIGHT = ((10,20), (10, 20))
+leftLeftColumn = [[buttonOne],[infoTextButtonOne]]
+leftCenterColumn = [[buttonTwo], [infoTextButtonTwo]]
+leftRightColumn = [[buttonThree], [infoTextButtonThree]]
 
-leftLeftColumn = [[headerTextButtonOne],[buttonOne],[infoTextButtonOne]]
-leftCenterColumn = [[headerTextButtonTwo], [buttonTwo], [infoTextButtonTwo]]
-leftRightColumn = [[headerTextButtonThree], [buttonThree], [infoTextButtonThree]]
 
-leftColumn = [[gui.Column(leftLeftColumn), gui.Column(leftCenterColumn), gui.Column(leftRightColumn)],[buttonNext]]
+
+leftColumn = [[headingLeftColumn], [gui.Column(leftLeftColumn), gui.Column(leftCenterColumn), gui.Column(leftRightColumn)],[buttonPrevious, buttonNext]]
 rightColumn = [[gui.Text(testModel.category[3], font='Any 10', key='debugOptions')]]
 
-layout = [[gui.Column(leftColumn, size=(600, 600)), gui.Column(rightColumn, size=(400, 600))]]
+layout = [[gui.Column(leftColumn, size=(600, 600)), gui.VerticalSeparator(), gui.Column(rightColumn, size=(400, 600))]]
 
-window = gui.Window('Dashboard PySimpleGUI-Style', layout, margins=(5,5), background_color=BORDER_COLOR, no_titlebar=False, grab_anywhere=False)
+window = gui.Window('PC Builder', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.moneyTwo, font='Consolas', finalize=True)
 
 while True:            
     event, values = window.read()
@@ -54,12 +51,14 @@ while True:
     elif event == 'buttonTwo':
         buttonPressed = 2
     elif event == 'buttonNext':
-        viewController.clickNextButton(buttonPressed)
+        viewController.updatePageAndElementsOnNextButtonClick(buttonPressed)
+    elif event == 'buttonPrevious':
+        viewController.updatePageAndElementsOnPreviousButtonClick(buttonPressed)
         window['buttonOne'].update(image_data=viewController.updateButtonIcon(1))
         window['buttonTwo'].update(image_data=viewController.updateButtonIcon(2))
         window['buttonThree'].update(image_data=viewController.updateButtonIcon(3))
-        window['buttonOne'].update(disabled=viewController.updateOptions(1))
-        window['buttonTwo'].update(disabled=viewController.updateOptions(2))      
-        window['buttonThree'].update(disabled=viewController.updateOptions(3))   
+        window['buttonOne'].update(disabled=viewController.updateButtonState(1))
+        window['buttonTwo'].update(disabled=viewController.updateButtonState(2))      
+        window['buttonThree'].update(disabled=viewController.updateButtonState(3))   
 
 window.close()
