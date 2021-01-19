@@ -1,30 +1,28 @@
 from ViewController import ViewController
 from AvailableOptionsModel import AvailableOptionsModel
-from tkinter.constants import ACTIVE, DISABLED, FALSE
-import PySimpleGUI as sg
-from PySimpleGUI.PySimpleGUI import Window
+from ImageData import ImageData
+import PySimpleGUI as gui
 
-
-buttonNext = sg.Button('NEXT', image_size=(100, 50), image_subsample=4, border_width=10, key='buttonNext')
+buttonNext = gui.Button('NEXT', size=(30,5), border_width=2, key='buttonNext')
 testModel = AvailableOptionsModel()
 viewController = ViewController()
 
+imageData = ImageData()     
+buttonOne = gui.Button('', image_data=imageData.price, border_width=2, key='buttonOne')
+buttonTwo = gui.Button('', image_data=imageData.price, border_width=2, key='buttonTwo')
+buttonThree = gui.Button('', image_data=imageData.price, border_width=2, key='buttonThree')
+
+headerTextButtonOne = gui.Text('Preis günstig', font='Fixedsys 12', key='textAboveButtonOne')
+headerTextButtonTwo = gui.Text('Preis moderat', font='Fixedsys 12', key='textAboveButtonTwo')
+headerTextButtonThree = gui.Text('Preis egal', font='Fixedsys 12', key='textAboveButtonThree')
+
+infoTextButtonOne = gui.Text('Info1', font='Fixedsys 12', key='textInfoButtonOne')
+infoTextButtonTwo = gui.Text('Info2', font='Fixedsys 12', key='textInfoButtonTwo')
+infoTextButtonThree = gui.Text('Info3', font='Fixedsys 12', key='textInfoButtonThree')
+
 buttonPressed = 0
 
-
-
-
-theme_dict = {'BACKGROUND': '#2B475D',
-                'TEXT': '#FFFFFF',
-                'INPUT': '#F2EFE8',
-                'TEXT_INPUT': '#000000',
-                'SCROLL': '#F2EFE8',
-                'BUTTON': ('#000000', '#C2D4D8'),
-                'PROGRESS': ('#FFFFFF', '#C7D5E0'),
-                'BORDER': 1,'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0}
-
-sg.LOOK_AND_FEEL_TABLE['Dashboard'] = theme_dict
-sg.theme('Dashboard')
+gui.theme('Dashboard')
 
 BORDER_COLOR = '#C7D5E0'
 DARK_HEADER_COLOR = '#1B2838'
@@ -33,40 +31,35 @@ BPAD_LEFT = ((20,10), (0, 10))
 BPAD_LEFT_INSIDE = (0, 10)
 BPAD_RIGHT = ((10,20), (10, 20))
 
-leftColumn = [[sg.Text('Preis moderat', font='Any 12', key='textblockFour')],
-            [viewController.buttonOne],
-            [sg.Text('Preis güntig', font='Any 12', key='textblockFour')],
-            [viewController.buttonTwo],
-            ]
+leftLeftColumn = [[headerTextButtonOne],[buttonOne],[infoTextButtonOne]]
+leftCenterColumn = [[headerTextButtonTwo], [buttonTwo], [infoTextButtonTwo]]
+leftRightColumn = [[headerTextButtonThree], [buttonThree], [infoTextButtonThree]]
 
-rightColumn = [[sg.Text(testModel.category[3], font='Any 10', key='debugOptions')],
-            [buttonNext]            
-            ]
+leftColumn = [[gui.Column(leftLeftColumn), gui.Column(leftCenterColumn), gui.Column(leftRightColumn)],[buttonNext]]
+rightColumn = [[gui.Text(testModel.category[3], font='Any 10', key='debugOptions')]]
 
-layout = [[sg.Column(leftColumn, size=(300, 600), pad=BPAD_LEFT, key="testtest")],
-        [sg.Column(rightColumn, size=(600,600), pad=BPAD_RIGHT)]
-        ]
+layout = [[gui.Column(leftColumn, size=(600, 600)), gui.Column(rightColumn, size=(400, 600))]]
 
-window = sg.Window('Dashboard PySimpleGUI-Style', layout, margins=(0,0), background_color=BORDER_COLOR, no_titlebar=False, grab_anywhere=True)
+window = gui.Window('Dashboard PySimpleGUI-Style', layout, margins=(5,5), background_color=BORDER_COLOR, no_titlebar=False, grab_anywhere=False)
 
-while True:             # Event Loop
+while True:            
     event, values = window.read()
     
-    if event == sg.WIN_CLOSED or event == 'Exit':
+    if event == gui.WIN_CLOSED or event == 'Exit':
         break
     elif event == 'buttonOne':
         buttonPressed = 1
-        testModel.changeSelection('price', 0)
-        #window['debugOptions'].update(testModel.printArray())
     elif event == 'buttonTwo':
         buttonPressed = 2
-        testModel.changeSelection('price', 1)
-        #window['debugOptions'].update(testModel.printArray())
+    elif event == 'buttonTwo':
+        buttonPressed = 2
     elif event == 'buttonNext':
         viewController.clickNextButton(buttonPressed)
         window['buttonOne'].update(image_data=viewController.updateButtonIcon(1))
         window['buttonTwo'].update(image_data=viewController.updateButtonIcon(2))
+        window['buttonThree'].update(image_data=viewController.updateButtonIcon(3))
         window['buttonOne'].update(disabled=viewController.updateOptions(1))
-        window['buttonTwo'].update(disabled=viewController.updateOptions(2))       
+        window['buttonTwo'].update(disabled=viewController.updateOptions(2))      
+        window['buttonThree'].update(disabled=viewController.updateOptions(3))   
 
 window.close()

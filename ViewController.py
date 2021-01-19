@@ -9,13 +9,13 @@ class ViewController(object):
         self.imageData = ImageData()     
         self.buttonOne = gui.Button('', image_data=self.imageData.price, border_width=2, key='buttonOne')
         self.buttonTwo = gui.Button('', image_data=self.imageData.price, border_width=2, key='buttonTwo')
+        self.buttonThree = gui.Button('', image_data=self.imageData.price, border_width=2, key='buttonThree')
         self.currentPage = 1
         self.availableOptionsData = AvailableOptionsModel()   
 
 
     def clickNextButton(self, buttonClicked):
         self.currentPage+=1
-        #self.updateButtons()
         self.updateAvailableOptions(buttonClicked)
 
 
