@@ -6,7 +6,7 @@ class ViewController(object):
     def __init__(self):   
         self.imageData = ImageData()  
         self.currentPage = 1
-        self.availableOptionsData = AvailableOptionsModel()   
+        self.propsData = AvailableOptionsModel()   
 
 
     def updatePageAndElementsOnNextButtonClick(self, buttonClicked):
@@ -20,63 +20,92 @@ class ViewController(object):
         self.updateAvailableOptions(buttonClicked)
 
 
-    def updateButtonIcon(self, button):
-        if self.currentPage == 1:
-            if button == 1: return self.imageData.buttonUsedForOne
-            elif button == 2: return self.imageData.buttonUsedForTwo
-            elif button == 3: return self.imageData.buttonUsedForThree
-        elif self.currentPage == 2:
-            if button == 1: return self.imageData.buttonMoneyOne
-            elif button == 2: return self.imageData.buttonMoneyTwo
-            elif button == 3: return self.imageData.buttonMoneyThree
-
-
     def updateButtonValues(self, button, returnTextValue, returnHeaderValue):
-        print(self.availableOptionsData.allOptions[self.currentPage-1][3][button-1])
-        if returnTextValue: return self.availableOptionsData.allOptions[self.currentPage-1][1][button-1]
-        elif returnHeaderValue: return self.availableOptionsData.allOptions[self.currentPage-1][0]
-        else: return self.availableOptionsData.allOptions[self.currentPage-1][3][button-1]
+        #print(self.propsData.allOptions[self.currentPage-1][3][button-1])
+        if returnTextValue: return self.propsData.allOptions[self.currentPage-1][1][button-1]
+        elif returnHeaderValue: return self.propsData.allOptions[self.currentPage-1][0]
+        else: return self.propsData.allOptions[self.currentPage-1][3][button-1]
 
+        
 
 
     def updateAvailableOptions(self, buttonClicked):
-        if self.currentPage == 1:                           
-            self.availableOptionsData.price[3] = [False, False, False] #reset all values
-            self.availableOptionsData.sizeAndWeight[3] = [False, False, False] 
-            self.availableOptionsData.batteryLife[3] = [False, False, False] 
 
-        elif self.currentPage == 2:            
-            if buttonClicked == 2 :
-                self.availableOptionsData.price[3][0] = True
-                self.availableOptionsData.sizeAndWeight[3][0] = True
-                self.availableOptionsData.batteryLife[3][2] = True
-                self.availableOptionsData.savedConfigurations[0][1][3][0] = True
-                self.availableOptionsData.savedConfigurations[0][2][3][0] = True
-                self.availableOptionsData.savedConfigurations[0][3][3][2] = True
+        # Speichern der Auswahl im Array
+        self.propsData.allOptions[self.currentPage-1][2] = buttonClicked 
+        print(self.propsData.allOptions[self.currentPage-1][2])   
 
-            elif buttonClicked == 3: self.availableOptionsData.price[3][0] = True
+        #Zurücksetzen aller Werte wenn der User auf Seite 1 ist / resettet
+        if self.currentPage == 1:    
+            for i in range(6):
+                self.propsData.allOptions[i][3] = [False, False, False]    
 
+        # Anpassung nach Auswahl Anwendungsgebiet
+        elif self.currentPage == 2:   
+            if buttonClicked == 1:
+                self.propsData.durability[3][2] = True
+            elif buttonClicked == 2 :
+                self.propsData.price[3][0] = True
+                self.propsData.sizeAndWeight[3][0] = True
+                self.propsData.batteryLife[3][2] = True
+                self.propsData.noiseEmission[3][1] = True
+                self.propsData.noiseEmission[3][2] = True
+                self.propsData.durability[3][2] = True
+                #self.propsData.savedConfigurations[0][1][3][0] = True
+                #self.propsData.savedConfigurations[0][2][3][0] = True
+                #self.propsData.savedConfigurations[0][3][3][2] = True
+            elif buttonClicked == 3: 
+                self.propsData.price[3][0] = True
+
+        # Anpassung nach Auswahl Preis
         elif self.currentPage == 3:            
             if buttonClicked == 1:
-                self.availableOptionsData.sizeAndWeight[3][2] = True
-                self.availableOptionsData.batteryLife[3][2] = True
+                self.propsData.sizeAndWeight[3][2] = True
+                self.propsData.batteryLife[3][2] = True
+                self.propsData.durability[3][1] = True
+                self.propsData.durability[3][2] = True
+            elif buttonClicked == 2 :                
+                self.propsData.durability[3][2] = True                
+            elif buttonClicked == 3: 
+                self.propsData.price[3][0] = True
 
-        elif self.currentPage == 4:            
-            if buttonClicked == 2:
-                self.availableOptionsData.batteryLife[3][2] = True
+        # Anpassung nach Auswahl Gewicht und Größe
+        elif self.currentPage == 4:  
+            if buttonClicked == 1:
+                self.propsData.noiseEmission[3][2] = True
+                self.propsData.durability[3][2] = True          
+            elif buttonClicked == 2:
+                self.propsData.batteryLife[3][2] = True
+                self.propsData.durability[3][2] = True 
             elif buttonClicked == 3:
-                self.availableOptionsData.batteryLife[3][1] = True
-                self.availableOptionsData.batteryLife[3][2] = True
+                self.propsData.batteryLife[3][1] = True
+                self.propsData.batteryLife[3][2] = True
+                self.propsData.noiseEmission[3][2] = True
 
-   
+        # Anpassung nach Auswahl Akku
+        elif self.currentPage == 5: 
+            if buttonClicked == 3:
+                self.propsData.durability[3][2] = True  
+
+        # Anpassung nach Auswahl Lautstärke
+        elif self.currentPage == 6:             
+            if buttonClicked == 3:
+                self.propsData.durability[3][2] = True  
+
+
 
     def updateWindowElements(self, window):
-        keyArray = ['buttonOne', 'buttonTwo', 'buttonThree', 'textInfoButtonOne', 'textInfoButtonTwo', 'textInfoButtonThree', 'headingLeftColumn']
-        for x in range(3):
-            window[keyArray[x]].update(image_data=self.updateButtonIcon(x+1))            
-            window[keyArray[x]].update(disabled=self.updateButtonValues(x+1, False, False))
-            window[keyArray[x+3]].update(self.updateButtonValues(x+1, True, False))
+        keyArray = ['buttonOne', 'buttonTwo', 'buttonThree', 'textInfoButtonOne', 'textInfoButtonTwo', 'textInfoButtonThree', 'headingLeftColumn', 'textInfoUserSelection']
+        for i in range(3):
+            window[keyArray[i]].update(image_data=self.imageData.buttonImageDictionary[self.currentPage][i])            
+            window[keyArray[i]].update(disabled=self.updateButtonValues(i+1, False, False))
+            window[keyArray[i+3]].update(self.updateButtonValues(i+1, True, False))
         window[keyArray[6]].update(self.updateButtonValues(0, False, True))
+        if self.currentPage != 1:
+            window[keyArray[7]].update(self.propsData.userSelection[self.currentPage-1] [self.propsData.allOptions[self.currentPage-2][2]-1])
+            print(self.propsData.userSelection[self.currentPage-1] [self.propsData.allOptions[self.currentPage-2][2]-1])
+
+
 
                      
             
