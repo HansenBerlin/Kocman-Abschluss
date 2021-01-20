@@ -21,6 +21,7 @@ headingLeftColumn = gui.Text('Auswahl: Anwendungsgebiet', background_color='#66b
 
 buttonPressed = 0
 
+#evtl in window/layout rein
 gui.SetOptions(background_color='#cee1cf',      
        use_ttk_buttons=True,
        button_color=('white', '#66bb6a'),
@@ -33,11 +34,14 @@ leftRightColumn = [[buttonThree], [infoTextButtonThree]]
 
 
 leftColumn = [[headingLeftColumn], [gui.Column(leftLeftColumn), gui.Column(leftCenterColumn), gui.Column(leftRightColumn)],[buttonPrevious, buttonNext]]
-rightColumn = [[gui.Text(testModel.category[3], font='Any 10', key='debugOptions')]]
+rightColumn = []
 
 layout = [[gui.Column(leftColumn, size=(600, 600)), gui.VerticalSeparator(), gui.Column(rightColumn, size=(400, 600))]]
 
-window = gui.Window('PC Builder', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.moneyTwo, font='Consolas', finalize=True)
+window = gui.Window('PC Builder', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.buttonUsedForThree, font='Consolas', finalize=True)
+
+#initialize, später löschen
+viewController.updateWindowElements(window)     
 
 while True:            
     event, values = window.read()
@@ -48,17 +52,13 @@ while True:
         buttonPressed = 1
     elif event == 'buttonTwo':
         buttonPressed = 2
-    elif event == 'buttonTwo':
-        buttonPressed = 2
+    elif event == 'buttonThree':
+        buttonPressed = 3
     elif event == 'buttonNext':
         viewController.updatePageAndElementsOnNextButtonClick(buttonPressed)
+        viewController.updateWindowElements(window)
     elif event == 'buttonPrevious':
         viewController.updatePageAndElementsOnPreviousButtonClick(buttonPressed)
-        window['buttonOne'].update(image_data=viewController.updateButtonIcon(1))
-        window['buttonTwo'].update(image_data=viewController.updateButtonIcon(2))
-        window['buttonThree'].update(image_data=viewController.updateButtonIcon(3))
-        window['buttonOne'].update(disabled=viewController.updateButtonState(1))
-        window['buttonTwo'].update(disabled=viewController.updateButtonState(2))      
-        window['buttonThree'].update(disabled=viewController.updateButtonState(3))   
+        viewController.updateWindowElements(window)     
 
 window.close()
