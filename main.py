@@ -19,12 +19,14 @@ infoTextButtonTwo =   gui.Text('                                                
                     font='Consolas 8', background_color='#cee1cf', text_color='black', key='textInfoButtonTwo', pad=([0,26],[20,50]))
 infoTextButtonThree =   gui.Text('                                                                                                   \n \n \n \n \n \n', 
                     font='Consolas 8', background_color='#cee1cf', text_color='black', key='textInfoButtonThree', pad=([0,0],[20,50]))
-infoTextCurrentUserSelection =   gui.Text('         ddd                                                                              \n \n \n \n \n \n', 
-                    font='Consolas 8', background_color='#cee1cf', text_color='black', key='textInfoUserSelection', pad=([0,0],[20,50]))
+infoTextRowNamesUserSelection = gui.Text('Anwendung/Leistung \nPreis \nGewicht und Größe \nAkkulaufzeit \nLautstärke \nRobustheit \n',
+                    font='Consolas 10', background_color='#cee1cf', text_color='black', pad=([50,0],[0,0]))
+infoTextCurrentUserSelection =   gui.Text('                                                                                          \n \n \n \n \n \n', 
+                    font='Consolas 10', background_color='#cee1cf', text_color='black', key='textInfoUserSelection', pad=([20,0],[0,0]))
 
 headingLeftColumn = gui.Text('Auswahl: Anwendungsgebiet', background_color='#66bb6a', border_width=15, size=(37,1), justification='center', key='headingLeftColumn', pad=([81,0],[35,25]))
 
-buttonPressed = 0
+buttonPressed = 4
 
 #evtl in window/layout rein
 gui.SetOptions(background_color='#cee1cf',      
@@ -36,17 +38,15 @@ leftLeftColumn = [[buttonOne],[infoTextButtonOne]]
 leftCenterColumn = [[buttonTwo], [infoTextButtonTwo]]
 leftRightColumn = [[buttonThree], [infoTextButtonThree]]
 
-
-
 leftColumn = [[headingLeftColumn], [gui.Column(leftLeftColumn), gui.Column(leftCenterColumn), gui.Column(leftRightColumn)],[buttonPrevious, buttonNext]]
-rightColumn = [[infoTextCurrentUserSelection]]
+rightColumn = [[infoTextRowNamesUserSelection, infoTextCurrentUserSelection]]
 
 layout = [[gui.Column(leftColumn, size=(600, 600)), gui.VerticalSeparator(), gui.Column(rightColumn, size=(400, 600))]]
 
 window = gui.Window('PC Builder', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.buttonUsedForThree, font='Consolas', finalize=True)
 
 #initialize, später löschen
-viewController.updateWindowElements(window)     
+viewController.updatePageAndElementsOnNextButtonClick(4, window)     
 
 while True:            
     event, values = window.read()
@@ -60,10 +60,10 @@ while True:
     elif event == 'buttonThree':
         buttonPressed = 3
     elif event == 'buttonNext':
-        viewController.updatePageAndElementsOnNextButtonClick(buttonPressed)
-        viewController.updateWindowElements(window)
+        viewController.updatePageAndElementsOnNextButtonClick(buttonPressed, window)        
+        buttonPressed = 4
     elif event == 'buttonPrevious':
-        viewController.updatePageAndElementsOnPreviousButtonClick(buttonPressed)
-        viewController.updateWindowElements(window)     
+        viewController.updatePageAndElementsOnPreviousButtonClick(buttonPressed, window)        
+        buttonPressed = 4 
 
 window.close()
