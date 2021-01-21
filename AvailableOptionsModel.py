@@ -3,37 +3,37 @@ class AvailableOptionsModel(object):
 
     def __init__(self):  
 
-        self.category = ['Auswahl: Anwendungsgebiet', 
+        self.category = ['Gesamtleistung/Anwendungsgebiet', 
                         ['Office: \n \n•Officeanwendungen \n•Internetnutzung \n•Webdesign \n \n', 
                         'Gaming: \n \n•wie Office plus: \n•Gaming (inkl. VR) \n•Bild- und \n Videobearbeitung \n', 
                         'Professional: \n \n•Entwicklung \n•Machine Learning \n•Workstation \n•Bild- und \n Videobearbeitung'],
                          4, [False, False, False, False]]     
 
-        self.price =    ['Auswahl: maximaler Preis', 
+        self.price =    ['maximaler Preis', 
                         ['niedrig: \n \n•einige Ein- \n schränkungen \n in der weiteren \n Auswahl  \n', 
                         'mittel: \n \n•ausreichend \n für die meisten \n Konfigurationen \n \n', 
                         'hoch: \n \n•keine Ein- \n schränkungen \n der weiteren \n Optionen \n'],
                         4, [False, False, False, False]]
 
-        self.sizeAndWeight = ['Auswahl: Größe und Gewicht', 
+        self.sizeAndWeight = ['Größe und Gewicht', 
                         ['klein & leicht: \n \n•max 13 Zoll \n•max 1200g \n•kein Numpad \n•nicht erweiterbar \n', 
                         'mittel: \n \n•14-15 Zoll \n•max 2000g \n•externes Netzteil \n•erweiterbar \n', 
                         'groß: \n \n•Desktopersatz \n•relativ laut \n•ermöglicht leis- \n tungsstarke \n Konfiguration'],
                          4, [False, False, False, False]]     
 
-        self.batteryLife =    ['Auswahl: Akkulaufzeit', 
+        self.batteryLife =    ['Akkulaufzeit', 
                         ['niedrig: \n \n•min. 2 Std. \n \n \n \n', 
                         'mittel: \n \n•min. 4 Std \n•max 8 Std. \n \n \n', 
                         'lang: \n \n•>8 Std. \n \n \n \n'],
                         4, [False, False, False, False]]
 
-        self.noiseEmission =    ['Auswahl: Lautstärkeentwicklung', 
+        self.noiseEmission =    ['Lautstärkeentwicklung', 
                         ['laut: \n \n•lauter Lüfter \n•max. moderate \n Hitzeentwicklung \n \n', 
                         'moderat: \n \n•Lüfter nur bei \n hoher Last \n•moderate Hitze- \n entwicklung \n', 
                         'flüsterleise: \n \n•kein Lüfter \n•nicht für kleine Ge- \n häuse möglich \n•ggfs. hohe Hitze- \n entwicklung'],
                         4, [False, False, False, False]]
 
-        self.durability =    ['Auswahl: Robustheit', 
+        self.durability =    ['Robustheit', 
                         ['Consumer: \n \n•bewährte All- \n tagsqualität \n•Garantie 2 Jahre \n•max. 5 Pixelfehler \n', 
                         'Business-Level: \n \n•hohe Robustheit \n für tägl. Einsatz \n•Garantie 3 Jahre \n•Spritzwasserschutz \n•keine Pixelfehler', 
                         'Outdoor/Special: \n \n•maximale Robustheit \n•für Außeneinsätze \n (Baustelle) geeignet \n•Garantie 5 Jahre \n•IP68 zertifiziert'],

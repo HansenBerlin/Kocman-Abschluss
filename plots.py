@@ -9,6 +9,7 @@ from matplotlib.spines import Spine
 from matplotlib.transforms import Affine2D
 
 
+
 def radar_factory(num_vars, frame='circle'):
     """
     Create a radar chart with `num_vars` axes.
@@ -114,7 +115,7 @@ def example_data():
         ['Rechenleistung', 'Akku', 'Preis', 'Gewicht', 'Größe', 'Grafikleistung', 'Haltbarkeit'],
         ('Basecase', [
             
-            [80, 70, 38, 40, 50, 90, 95]]),
+            [95, 105, 100, 98, 99, 102, 103]]),
        
     ]
     return data
