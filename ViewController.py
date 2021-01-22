@@ -1,7 +1,6 @@
 from CombineOptionsController import CombineOptionsController
 from ImageData import ImageData
 from AvailableOptionsModel import AvailableOptionsModel
-from RadarChartBuilder import RadarChartBuilder
 
 
 keyDic = {
@@ -26,7 +25,6 @@ class ViewController(object):
         self.imageData = ImageData()
         self.propsData = AvailableOptionsModel()
         self.mainController = CombineOptionsController(self.propsData) 
-        self.plotSimpleSelection = RadarChartBuilder()
              
 
     def updatePageAndElementsOnNextButtonClick(self, buttonClicked, window):

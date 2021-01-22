@@ -7,7 +7,8 @@ import PySimpleGUI as gui
 
 testModel = AvailableOptionsModel()
 viewController = ViewController()
-imageData = ImageData()  
+imageData = ImageData() 
+figTest = RadarChartBuilder() 
 
 buttonPrevious = gui.Button('PREVOUS', image_data=imageData.buttonPrevious, size=(14,1.0), key='buttonPrevious', button_color=('white', '#66bb6a'), pad=([80,40],[0,0]))
 buttonNext = gui.Button('NEXT', image_data=imageData.buttonNext, size=(14,1.0), key='buttonNext', button_color=('white', '#66bb6a'))
@@ -20,8 +21,8 @@ infoTextButtonTwo =   gui.Text('                                                
 infoTextButtonThree =   gui.Text('                                                                                                   \n \n \n \n \n \n', font='Consolas 8', background_color='#eef5ef', text_color='black', key='textInfoButtonThree', pad=([0,0],[20,50]))
 infoTextRowNamesUserSelection = gui.Text('Anwendung/Leistung \nPreis \nGewicht und Größe \nAkkulaufzeit \nLautstärke \nRobustheit \n',font='Consolas 10', background_color='#eef5ef', text_color='black', pad=([80,0],[0,0]))
 infoTextCurrentUserSelection =   gui.Text('                                                                                          \n \n \n \n \n \n', font='Consolas 10', background_color='#eef5ef', text_color='black', key='textRightColumnInfoSelection', pad=([20,0],[0,0]))
-headingLeftColumn = gui.Text('Auswahl: Anwendungsgebiet', background_color='#252525', border_width=15, size=(37,1), justification='center', key='headingLeftColumn', pad=([81,0],[35,25]))
-headingRightColumn = gui.Text('Aktuelle Auswahl', background_color='#252525', border_width=15, size=(27,1), justification='center', pad=([81,0],[35,25]))
+headingLeftColumn = gui.Text('Auswahl: Anwendungsgebiet', background_color='#252525', border_width=15, size=(45,1), justification='center', key='headingLeftColumn', pad=([81,0],[35,25]))
+headingRightColumn = gui.Text('Aktuelle Auswahl', background_color='#252525', border_width=15, size=(33,1), justification='center', pad=([81,0],[35,25]))
 plotCanvas = gui.Image(key='plotCanvas', pad=([0,0],[20,0]), size=(500,400), background_color='#eef5ef')
 
 buttonPressed = 4
@@ -38,9 +39,9 @@ rightColumn = [[gui.Column([[headingRightColumn],[infoTextRowNamesUserSelection,
 layout = [[gui.Column(leftColumn, size=(600, 700)), gui.VerticalSeparator(), gui.Column(rightColumn, size=(500, 700))]]
 window = gui.Window('PC Builder', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.buttonUsedForThree, font='Consolas', finalize=True)
 
-figTest = RadarChartBuilder()
-figTest.buildChart3()
-window['plotCanvas'].update('images/fig3.png')
+
+#figTest.buildRadarChart()
+window['plotCanvas'].update('plotImages/radarplotUserSelection.png')
 
 #initialize, später löschen
 viewController.updatePageAndElementsOnNextButtonClick(4, window)   
