@@ -1,7 +1,7 @@
 from ConfigurationController import ConfigurationController
+from AvailableOptionsModel import AvailableOptionsModel
 from CombineOptionsController import CombineOptionsController
 from ImageData import ImageData
-from AvailableOptionsModel import AvailableOptionsModel
 
 
 keyDic = {
@@ -27,20 +27,22 @@ class ViewController(object):
         self.propsData = AvailableOptionsModel()
         self.mainController = CombineOptionsController(self.propsData) 
         self.configController = ConfigurationController()
-             
 
+   
     def updatePageAndElementsOnNextButtonClick(self, buttonClicked, window):
         if self.currentPage < 7:
-            if self.currentPage != 0: self.mainController.updateAvailableOptions(self.propsData, buttonClicked, self.currentPage)
-            self.configController.updatePartIndexValues(self.propsData.partsPerformanceIndexes, self.propsData.allOptions)
+            if self.currentPage != 0: 
+                self.mainController.updateAvailableOptions(self.propsData, buttonClicked, self.currentPage)
+            self.configController.updatePartIndexValues(self.propsData)
             self.currentPage+=1
             self.updateLeftColumnElements(window)
-            self.updateRightColumnElements(window)            
+            self.updateRightColumnElements(window)
+                   
 
 
-    def updatePageAndElementsOnPreviousButtonClick(self, buttonClicked, window):        
+    def updatePageAndElementsOnPreviousButtonClick(self, buttonClicked, window):  
         self.mainController.updateAvailableOptions(self.propsData, buttonClicked, self.currentPage)
-        self.configController.updatePartIndexValues(self.propsData.partsPerformanceIndexes, self.propsData.allOptions)
+        self.configController.updatePartIndexValues(self.propsData)
         self.currentPage-=1
         self.updateLeftColumnElements(window)
         self.updateRightColumnElements(window)        
@@ -49,7 +51,8 @@ class ViewController(object):
     def updateButtonValues(self, button, returnTextValue, returnHeaderValue):
         if returnTextValue: return self.propsData.allOptions[self.currentPage-1][1][button]
         elif returnHeaderValue: return self.propsData.allOptions[self.currentPage-1][0]
-        else: return self.propsData.allOptions[self.currentPage-1][3][button]  
+        else: return self.propsData.allOptions[self.currentPage-1][3][button] 
+         
 
 
     def updateLeftColumnElements(self, window):
@@ -57,7 +60,7 @@ class ViewController(object):
             window[keyDic[i+1]].update(image_data=self.imageData.buttonImageDictionary[self.currentPage][i])            
             window[keyDic[i+1]].update(disabled=self.updateButtonValues(i, False, False))
             window[keyDic[i+4]].update(self.updateButtonValues(i, True, False))
-        window[keyDic[7]].update(self.updateButtonValues(0, False, True)) 
+        window[keyDic[7]].update(self.updateButtonValues(0, False, True))         
 
 
     def updateRightColumnElements(self, window):

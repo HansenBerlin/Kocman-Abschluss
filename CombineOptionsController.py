@@ -5,8 +5,7 @@ class CombineOptionsController(object):
         #self.propsData2 = AvailableOptionsModel()
 
 
-    def updateAvailableOptions(propsData, buttonClicked, page):
-
+    def updateAvailableOptions(self, propsData, buttonClicked, page):
         propsData.allOptions[page-1][2] = buttonClicked
         # aktuelle Auswahl auf dieser Seite wird im Array gespeichert    
         for i in range(6):

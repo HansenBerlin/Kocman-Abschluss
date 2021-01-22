@@ -42,6 +42,10 @@ class AvailableOptionsModel(object):
 
         self.allOptions = [self.category, self.price, self.sizeAndWeight, self.batteryLife, self.noiseEmission, self.durability]
 
+        self.partIndexValues = [3,3,3,3,3,3,3,3]        
+        self.savedConfigurations = []
+        self.savedButtonChoices = [4,4,4,4,4,4]
+
         self.userSelection = {
             1: ['Office', 'Gaming', 'Professional', 'keine Präferenz'],
             2: ['niedrig', 'mittel', 'hoch', 'keine Präferenz'],
@@ -51,18 +55,7 @@ class AvailableOptionsModel(object):
             6: ['Consumer', 'Business-Level', 'Outdoor/Special', 'keine Präferenz']            
         }
 
-        self.partsPerformanceIndexes = {
-            'CPU': 3,
-            'Price': 3,
-            'Weight': 3,
-            'Noise': 3,
-            'Durability': 3,
-            'StorageCap': 3,
-            'Battery': 3,
-            'GPU': 3
-        }
         
-        self.savedConfigurations = []
 
         
            

@@ -1,11 +1,9 @@
 from RadarChartBuilder import RadarChartBuilder
 from ViewController import ViewController
-from AvailableOptionsModel import AvailableOptionsModel
 from ImageData import ImageData
 import PySimpleGUI as gui
 
 
-testModel = AvailableOptionsModel()
 viewController = ViewController()
 imageData = ImageData() 
 figTest = RadarChartBuilder() 
