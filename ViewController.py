@@ -3,6 +3,7 @@ from ImageData import ImageData
 from AvailableOptionsModel import AvailableOptionsModel
 from RadarChartBuilder import RadarChartBuilder
 
+
 keyDic = {
         1: 'buttonOne',
         2: 'buttonTwo',
@@ -26,6 +27,7 @@ class ViewController(object):
         self.propsData = AvailableOptionsModel()
         self.mainController = CombineOptionsController(self.propsData) 
         self.plotSimpleSelection = RadarChartBuilder()
+
              
 
     def updatePageAndElementsOnNextButtonClick(self, buttonClicked, window):
@@ -74,6 +76,6 @@ class ViewController(object):
             window[keyDic[10]].update(visible=True)
             window[keyDic[11]].update(visible=False)
 
-    def updatePlotOnCanvas(self, window):        
-        window[keyDic[12]].update(data=self.plotSimpleSelection.image)
+    #def updatePlotOnCanvas(self, window):        
+        #window[keyDic[12]].update(data=self.plotSimpleSelection.image)
 
