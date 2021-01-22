@@ -1,3 +1,4 @@
+from ConfigurationController import ConfigurationController
 from CombineOptionsController import CombineOptionsController
 from ImageData import ImageData
 from AvailableOptionsModel import AvailableOptionsModel
@@ -25,11 +26,13 @@ class ViewController(object):
         self.imageData = ImageData()
         self.propsData = AvailableOptionsModel()
         self.mainController = CombineOptionsController(self.propsData) 
+        self.configController = ConfigurationController()
              
 
     def updatePageAndElementsOnNextButtonClick(self, buttonClicked, window):
         if self.currentPage < 7:
             if self.currentPage != 0: self.mainController.updateAvailableOptions(self.propsData, buttonClicked, self.currentPage)
+            self.configController.updatePartIndexValues(self.propsData.partsPerformanceIndexes, self.propsData.allOptions)
             self.currentPage+=1
             self.updateLeftColumnElements(window)
             self.updateRightColumnElements(window)            
@@ -37,6 +40,7 @@ class ViewController(object):
 
     def updatePageAndElementsOnPreviousButtonClick(self, buttonClicked, window):        
         self.mainController.updateAvailableOptions(self.propsData, buttonClicked, self.currentPage)
+        self.configController.updatePartIndexValues(self.propsData.partsPerformanceIndexes, self.propsData.allOptions)
         self.currentPage-=1
         self.updateLeftColumnElements(window)
         self.updateRightColumnElements(window)        

@@ -50,6 +50,17 @@ class AvailableOptionsModel(object):
             5: ['laut', 'moderat', 'flüsterleise', 'keine Präferenz'],
             6: ['Consumer', 'Business-Level', 'Outdoor/Special', 'keine Präferenz']            
         }
+
+        self.partsPerformanceIndexes = {
+            'CPU': 3,
+            'Price': 3,
+            'Weight': 3,
+            'Noise': 3,
+            'Durability': 3,
+            'StorageCap': 3,
+            'Battery': 3,
+            'GPU': 3
+        }
         
         self.savedConfigurations = []
 

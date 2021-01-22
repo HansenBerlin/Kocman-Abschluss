@@ -1,14 +1,11 @@
-from AvailableOptionsModel import AvailableOptionsModel
-
-
 class CombineOptionsController(object):    
 
     def __init__(self, props):   
         self.propsData = props
-        self.propsData2 = AvailableOptionsModel()
+        #self.propsData2 = AvailableOptionsModel()
 
 
-    def updateAvailableOptions(self, propsData, buttonClicked, page):
+    def updateAvailableOptions(propsData, buttonClicked, page):
 
         propsData.allOptions[page-1][2] = buttonClicked
         # aktuelle Auswahl auf dieser Seite wird im Array gespeichert    
