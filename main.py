@@ -40,8 +40,8 @@ layout = [[gui.Column(leftColumn, size=(600, 700)), gui.VerticalSeparator(), gui
 window = gui.Window('PC Builder', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.buttonUsedForThree, font='Consolas', finalize=True)
 
 
-#figTest.buildRadarChart()
-window['plotCanvas'].update('plotImages/radarplotUserSelection.png')
+figTest.buildRadarChart()
+window['plotCanvas'].update('plotImages/radarplotUserSelection4.png')
 
 #initialize, später löschen
 viewController.updatePageAndElementsOnNextButtonClick(4, window)   

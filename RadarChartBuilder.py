@@ -1,16 +1,22 @@
 import plotly.graph_objects as go
 import os
 
-categories = ['Rechenleistung', 'Grafikleistung', 'Akku', 'Speicher', 'Robustheit', 'Lautstärke', 'Gewicht', 'Preis']  
+# Höherer Farbindex=bessere Leistung; cD = Colordictionary
+cD = {        
+        1: 'rgb(71, 75, 205)',
+        2: 'rgb(0, 116, 231)',
+        3:'rgb(0, 143, 220)',
+        4: 'rgb(0, 163, 183)',
+        5: 'rgb(0, 177, 139)',
+        6: 'rgb(102, 187, 106)'  
+        }
 
 class RadarChartBuilder(object):
-    def __init__(self):        
-        self.createDirectory()
-        print(self.categories)
-        categories = self.categories.reverse()
-        print(categories)
 
-        
+    def __init__(self):
+        self.categories = ['Rechenleistung', 'Preis', 'Gewicht', 'Lautstärke', 'Robustheit', 'Speicher', 'Akku', 'Grafikleistung']  
+
+
     def createDirectory(self):
         try: 
             if not os.path.exists("plotImages"): os.mkdir("plotImages")
@@ -19,56 +25,56 @@ class RadarChartBuilder(object):
     
     def buildRadarChart(self):
         fig = go.Figure()     
-
         fig.add_trace(go.Barpolar(
             r=[1,1,1,1,1,1,1,1],
-            theta=categories,
-            marker_color='rgb(71, 75, 205)',
+            theta=self.categories,
+            #marker_color='rgb(71, 75, 205)',
+            marker_color=[cD[1],cD[6],cD[6],cD[6],cD[1],cD[1],cD[1],cD[1]],
             marker_line_color="black",
             marker_line_width=1,
             opacity=0.8
         ))
         fig.add_trace(go.Barpolar(
             r=[1,1,1,1,1,1,1,0],
-            theta=categories,
-            marker_color='rgb(0, 116, 231)',
+            theta=self.categories,
+            marker_color=[cD[2],cD[5],cD[5],cD[5],cD[2],cD[2],cD[2],cD[2]],
             marker_line_color="black",
             marker_line_width=1,
             opacity=0.8
         ))  
         fig.add_trace(go.Barpolar(
             r=[1,1,1,0,1,1,1,0],
-            theta=categories,
-            marker_color='rgb(0, 143, 220)',
+            theta=self.categories,
+            marker_color=[cD[3],cD[4],cD[4],cD[4],cD[3],cD[3],cD[3],cD[3]],
             marker_line_color="black",
             marker_line_width=1,
             opacity=0.8
         ))  
         fig.add_trace(go.Barpolar(
             r=[1,1,1,0,0,1,1,0],
-            theta=categories,
-            marker_color='rgb(0, 163, 183)',
+            theta=self.categories,
+            marker_color=[cD[4],cD[3],cD[3],cD[3],cD[4],cD[4],cD[4],cD[4]],
             marker_line_color="black",
             marker_line_width=1,
             opacity=0.8
         ))  
         fig.add_trace(go.Barpolar(
             r=[1,0,1,0,1,0,1,0],
-            theta=categories,
-            marker_color='rgb(0, 177, 139)',
+            theta=self.categories,
+            marker_color=[cD[5],cD[2],cD[2],cD[2],cD[5],cD[5],cD[5],cD[5]],
             marker_line_color="black",
             marker_line_width=1,
             opacity=0.8
         ))  
         fig.add_trace(go.Barpolar(
             r=[1,0,0,0,1,0,0,0],
-            theta=categories,
-            marker_color='rgb(102, 187, 106)',
+            theta=self.categories,
+            marker_color=[cD[6],cD[1],cD[1],cD[1],cD[6],cD[6],cD[6],cD[6]],
             marker_line_color="black",
             marker_line_width=1,
             opacity=0.8
         ))       
-        
+
         fig.update_traces()
         fig.update_layout(
             template="none",
@@ -78,10 +84,9 @@ class RadarChartBuilder(object):
             font_family='Consolas',
             showlegend = False,
             font_color='#000000',
-            polar = dict(bgcolor='#eef5ef', radialaxis = dict(visible = False, range = [0, 6]), angularaxis = dict(rotation=-45)),
+            polar = dict(bgcolor='#eef5ef', radialaxis = dict(visible = False, range = [0, 6]), angularaxis = dict(rotation=90)),
             paper_bgcolor='#eef5ef'            
         )
-
-        #fig.write_image("plotImages/radarplotUserSelection7.png", 'png', 'kaleido', width=500, height=400)
+        fig.write_image("plotImages/radarplotUserSelection4.png", 'png', 'kaleido', width=500, height=400)
 
     
