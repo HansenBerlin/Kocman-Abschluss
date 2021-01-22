@@ -44,43 +44,61 @@ class RadarChartBuilder(object):
     
     def buildChart3(self):
         categories = ['Preis', 'Grafikleistung', 'Rechenleistung', 'Akkulaufzeit', 'Gewicht', 'Robustheit', 'Speicherplatz', 'Lautstärke']  
-        fig = go.Figure()
+        fig = go.Figure()        
 
         fig.add_trace(go.Barpolar(
             r=[1,1,1,1,1,1,1,1],
             name='niedrig',
             theta=categories,
-            marker_color='rgb(71, 75, 205)'
+            marker_color='rgb(71, 75, 205)',
+            marker_line_color="black",
+            marker_line_width=1,
+            opacity=0.8
         ))
         fig.add_trace(go.Barpolar(
             r=[1,1,1,1,1,1,1,0],
             name='niedrig',
             theta=categories,
-            marker_color='rgb(0, 116, 231)'
+            marker_color='rgb(0, 116, 231)',
+            marker_line_color="black",
+            marker_line_width=1,
+            opacity=0.8
         ))  
         fig.add_trace(go.Barpolar(
             r=[1,1,1,0,1,1,1,0],
             name='niedrig',
             theta=categories,
-            marker_color='rgb(0, 143, 220)'
+            marker_color='rgb(0, 143, 220)',
+            marker_line_color="black",
+            marker_line_width=1,
+            opacity=0.8
         ))  
         fig.add_trace(go.Barpolar(
             r=[1,1,1,0,0,1,1,0],
             name='niedrig',
             theta=categories,
-            marker_color='rgb(0, 163, 183)'
+            marker_color='rgb(0, 163, 183)',
+            marker_line_color="black",
+            marker_line_width=1,
+            opacity=0.8
         ))  
         fig.add_trace(go.Barpolar(
             r=[1,0,1,0,1,0,1,0],
             name='niedrig',
             theta=categories,
-            marker_color='rgb(0, 177, 139)'
+            marker_color='rgb(0, 177, 139)',
+            marker_line_color="black",
+            marker_line_width=1,
+            opacity=0.8
         ))  
         fig.add_trace(go.Barpolar(
             r=[1,0,0,0,1,0,0,0],
             name='niedrig',
             theta=categories,
-            marker_color='rgb(102, 187, 106)'
+            marker_color='rgb(102, 187, 106)',
+            marker_line_color="black",
+            marker_line_width=1,
+            opacity=0.8
         ))       
         
         fig.update_traces()
@@ -92,9 +110,8 @@ class RadarChartBuilder(object):
             font_family='Consolas',
             showlegend = False,
             font_color='#000000',
-            polar = dict(bgcolor='#cee1cf'),
-            paper_bgcolor='#cee1cf'
-            
+            polar = dict(bgcolor='#eef5ef', radialaxis = dict(visible = False, range = [0, 6]), angularaxis = dict(rotation=45)),
+            paper_bgcolor='#eef5ef'            
         )
 
         fig.write_image("images/fig3.png", 'png', 'kaleido', width=500, height=400)

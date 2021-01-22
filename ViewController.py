@@ -27,7 +27,6 @@ class ViewController(object):
         self.propsData = AvailableOptionsModel()
         self.mainController = CombineOptionsController(self.propsData) 
         self.plotSimpleSelection = RadarChartBuilder()
-
              
 
     def updatePageAndElementsOnNextButtonClick(self, buttonClicked, window):
