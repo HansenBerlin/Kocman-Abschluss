@@ -1,3 +1,4 @@
+from FinalNotebookModel import FinalNotebookModel
 from ImageData import ImageData
 import PySimpleGUI as gui
 from AvailableOptionsModel import AvailableOptionsModel
@@ -7,16 +8,15 @@ class FinalNotebookView():
 
     def initMainWindow():
         imageData = ImageData() 
+        finalNotebookData = FinalNotebookModel()
        
         buttonConfirm = gui.Button('FERTIG', image_data=imageData.buttonConfirmPurchase, pad=([74,0],[10,0]), size=(1,1), key='btnConfirmAndFinish', button_color=('white', '#66bb6a'))
        
-        infoTextButtonOne =   gui.Text('  \n \n \n \n \n \n', font='Consolas 8', background_color='#eef5ef', text_color='black', key='textInfoButtonOne', pad=([81,0],[20,50]))
         infoTextRowNamesUserSelection = gui.Text('Anwendung/Leistung \nPreis \nGewicht und Größe \nAkkulaufzeit \nLautstärke \nRobustheit \n',font='Consolas 10', background_color='#eef5ef', text_color='black', pad=([80,0],[0,0]))
         infoTextCurrentUserSelection =   gui.Text('                                                                                          \n \n \n \n \n \n', font='Consolas 10', background_color='#eef5ef', text_color='black', key='textRightColumnInfoFinalSelection', pad=([20,0],[0,0]))
         headingLeftColumn = gui.Text('Ihre optimale Konfiguration', background_color='#252525', text_color='white', border_width=15, size=(45,1), justification='center', key='headingLeftColumn', pad=([81,0],[35,25]))
         headingRightColumn = gui.Text('Leistungsindex', text_color='white', background_color='#252525', border_width=15, size=(33,1), justification='center', pad=([81,0],[35,25]))
         plotCanvas = gui.Image(key='plotCanvas', pad=([0,0],[20,0]), size=(500,400), background_color='#eef5ef', filename='plotImages/radarplotUserSelection4.png')    
-        partsOverview = gui.Image(pad=([74,0],[10,0]), size=(450,400), background_color='#eef5ef', filename='ressources/secondScreenBg.png')    
 
         
 
@@ -55,9 +55,9 @@ class FinalNotebookView():
                         6: 'keyAkku',
                         7: 'keyLüftersystem',
                         8: 'keyPreis'
-                       
         }
 
+        print(finalNotebookData.createConfigArray())
 
         colLeft = []      
         for i in range(9):

@@ -1,13 +1,19 @@
 savedConfigFinalState = []
+savedIndexValues = []
 
 class AvailableOptionsModel(object):   
 
-    def setFinalConfigState(config):
+    def setFinalConfigState(config, parts):
         global savedConfigFinalState
+        global savedIndexValues
         savedConfigFinalState = config
+        savedIndexValues = parts
 
     def getFinalConfigState():
         return savedConfigFinalState
+
+    def getSavedIndexValues():
+        return savedIndexValues
 
 
     def __init__(self):  
