@@ -3,7 +3,7 @@ from ViewController import ViewController
 from ImageData import ImageData
 import PySimpleGUI as gui
 
-class MainView():
+class UserSelectionView():
     def initMainWindow():
         viewController = ViewController()
         imageData = ImageData() 
@@ -40,7 +40,7 @@ class MainView():
         leftRightColumn = [[buttonThree], [infoTextButtonThree], [confirmSelectionImageThree]]
         leftColumn = [[headingLeftColumn], [gui.Column(leftLeftColumn), gui.Column(leftCenterColumn), gui.Column(leftRightColumn)],[buttonPrevious, buttonNext, buttonConfirm]]
         rightColumn = [[gui.Column([[headingRightColumn],[infoTextRowNamesUserSelection, infoTextCurrentUserSelection],[plotCanvas]])]]
-        layout = [[gui.Column(leftColumn, size=(600, 700)), gui.VerticalSeparator(), gui.Column(rightColumn, size=(500, 700))]]
+        layout = [[gui.Column(leftColumn, size=(600, 700), key="testtesttest"), gui.VerticalSeparator(), gui.Column(rightColumn, size=(500, 700))]]
         window = gui.Window('PC Builder', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.buttonUsedForThree, font='Consolas', finalize=True)
 
 
@@ -48,6 +48,8 @@ class MainView():
         viewController.updatePageAndElementsOnNextButtonClick(4, window)   
         viewController.checkPrevAndNextButtonStates(4, window)  
         #viewController.updatePlotOnCanvas(window)
+
+        
 
         while True:            
             event, values = window.read()
@@ -75,3 +77,5 @@ class MainView():
 
 
         window.close()
+
+  

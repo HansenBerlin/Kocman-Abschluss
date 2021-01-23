@@ -1,6 +1,6 @@
-from MainView import MainView
-from MainViewTwo import MainViewTwo
+from UserSelectionView import UserSelectionView
+from FinalNotebookView import FinalNotebookView
 
 
-MainView.initMainWindow()
-MainViewTwo.initMainWindow()
+UserSelectionView.initMainWindow()
+FinalNotebookView.initMainWindow()

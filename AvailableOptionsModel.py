@@ -1,5 +1,14 @@
+savedConfigFinalState = []
 
-class AvailableOptionsModel(object):    
+class AvailableOptionsModel(object):   
+
+    def setFinalConfigState(config):
+        global savedConfigFinalState
+        savedConfigFinalState = config
+
+    def getFinalConfigState():
+        return savedConfigFinalState
+
 
     def __init__(self):  
 

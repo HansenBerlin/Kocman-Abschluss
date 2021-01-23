@@ -78,6 +78,7 @@ class ViewController(object):
         for i in range(6):
             self.propsData.savedConfigurations.append(self.propsData.userSelection[i+1][(self.propsData.allOptions[i][2])-1])  
         window[keyDic[8]].update("\n".join(self.propsData.savedConfigurations))
+        AvailableOptionsModel.setFinalConfigState(self.propsData.savedConfigurations)
 
 
     def checkPrevAndNextButtonStates(self, buttonClicked, window):
