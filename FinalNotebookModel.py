@@ -119,8 +119,7 @@ class FinalNotebookModel:
                                     self.availableCoolerSystemDict, self.availableCaseDict, self.availableStorageDict, 
                                     self.availableBatteryDict, self.availableGPUDict, self.availableRamDict]
 
-                                    # Ram ud Graka 2
-
+                                   
     def createConfigArray(self):
         finalConfigurationOnView = []
         for i in range(8):

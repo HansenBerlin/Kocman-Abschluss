@@ -3,6 +3,8 @@ from ConfigurationController import ConfigurationController
 from AvailableOptionsModel import AvailableOptionsModel
 from CombineOptionsController import CombineOptionsController
 from ImageData import ImageData
+from FinalNotebookModel import FinalNotebookModel
+
 
 
 keyDic = {
@@ -32,6 +34,8 @@ class ViewController(object):
         self.mainController = CombineOptionsController(self.propsData) 
         self.configController = ConfigurationController()
         self.plotBuilder = RadarChartBuilder()
+        self.finalNotebookData = FinalNotebookModel()
+
 
    
     def updatePageAndElementsOnNextButtonClick(self, buttonClicked, window):
@@ -114,6 +118,20 @@ class ViewController(object):
             window[keyDic[i+13]].update('ressources/placeholderTick.png')
         if buttonClicked != 4:
             window[keyDic[buttonClicked+12]].update('ressources/tick.png')
+
+    def updateComponentsInFinalView(self, window, keyDict):
+        finalComponentList = self.finalNotebookData.createConfigArray()
+        window[keyDict[0]].update(finalComponentList[4])
+        window[keyDict[1]].update(finalComponentList[0])
+        window[keyDict[2]].update(finalComponentList[8])
+        window[keyDict[3]].update(finalComponentList[5])
+        window[keyDict[4]].update(finalComponentList[7])
+        window[keyDict[5]].update(finalComponentList[2])
+        window[keyDict[6]].update(finalComponentList[6])
+        window[keyDict[7]].update(finalComponentList[3])
+        window[keyDict[8]].update(finalComponentList[1])
+        window['textRightColumnInfoFinalSelection'].update("\n".join(AvailableOptionsModel.getFinalConfigState()))
+
 
         
 

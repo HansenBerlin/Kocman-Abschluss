@@ -1,7 +1,9 @@
-from PySimpleGUI.PySimpleGUI import Image
+from PySimpleGUI.PySimpleGUI import BUTTON_TYPE_CLOSES_WIN, CloseButton, Image
 from ViewController import ViewController
 from ImageData import ImageData
 import PySimpleGUI as gui
+from FinalNotebookView import FinalNotebookView
+
 
 class UserSelectionView():
     def initMainWindow():
@@ -10,7 +12,7 @@ class UserSelectionView():
 
         buttonPrevious = gui.Button('PREVOUS', image_data=imageData.buttonPrevious, size=(14,1.0), key='buttonPrevious', button_color=('white', '#66bb6a'), pad=([80,40],[0,0]))
         buttonNext = gui.Button('NEXT', image_data=imageData.buttonNoPreference, size=(14,1.0), key='buttonNext', button_color=('white', '#66bb6a'))
-        buttonConfirm = gui.Button('FERTIG', image_data=imageData.buttonDone, size=(14,1.0), key='btnConfirmAndFinish', button_color=('white', '#66bb6a'))
+        buttonConfirm = gui.Button('DONE', image_data=imageData.buttonDone, button_type=BUTTON_TYPE_CLOSES_WIN, size=(14,1.0), key='btnConfirmAndFinish', button_color=('white', '#66bb6a'))
         buttonOne = gui.Button('', image_data=imageData.buttonUsedForOne, key='buttonOne', button_color=('white', '#66bb6a'), pad=([81,26],[0,0]))
         buttonTwo = gui.Button('', image_data=imageData.buttonUsedForTwo, key='buttonTwo', button_color=('white', '#66bb6a'), pad=([0,26],[0,0]))
         buttonThree = gui.Button('', image_data=imageData.buttonUsedForThree, key='buttonThree', button_color=('white', '#66bb6a'))
@@ -33,28 +35,29 @@ class UserSelectionView():
         gui.SetOptions(background_color='#eef5ef',      
                use_ttk_buttons=True,
                button_color=('white', '#66bb6a'),
-               text_color='black')
+               text_color='black',)
 
         leftLeftColumn = [[buttonOne],[infoTextButtonOne],[confirmSelectionImageOne]]
         leftCenterColumn = [[buttonTwo], [infoTextButtonTwo], [confirmSelectionImageTwo]]
         leftRightColumn = [[buttonThree], [infoTextButtonThree], [confirmSelectionImageThree]]
         leftColumn = [[headingLeftColumn], [gui.Column(leftLeftColumn), gui.Column(leftCenterColumn), gui.Column(leftRightColumn)],[buttonPrevious, buttonNext, buttonConfirm]]
         rightColumn = [[gui.Column([[headingRightColumn],[infoTextRowNamesUserSelection, infoTextCurrentUserSelection],[plotCanvas]])]]
-        layout = [[gui.Column(leftColumn, size=(600, 700), key="testtesttest"), gui.VerticalSeparator(), gui.Column(rightColumn, size=(500, 700))]]
+        layout = [[gui.Column(leftColumn, size=(600, 700)), gui.VerticalSeparator(), gui.Column(rightColumn, size=(500, 700))]]
         window = gui.Window('PC Builder', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.buttonUsedForThree, font='Consolas', finalize=True)
 
 
         #initialize, später löschen
         viewController.updatePageAndElementsOnNextButtonClick(4, window)   
-        viewController.checkPrevAndNextButtonStates(4, window)  
-        #viewController.updatePlotOnCanvas(window)
-
-        
+        viewController.checkPrevAndNextButtonStates(4, window)          
 
         while True:            
             event, values = window.read()
 
-            if event == gui.WIN_CLOSED or event == 'Exit':
+            exit = True
+            if viewController.currentPage == 6: exit = False
+
+            if event == gui.WIN_CLOSED or event == 'Exit':  
+                FinalNotebookView.initMainWindow(exit)              
                 break
             elif event == 'buttonOne':
                 buttonPressed = 1
@@ -68,6 +71,8 @@ class UserSelectionView():
             elif event == 'buttonPrevious':
                 viewController.updatePageAndElementsOnPreviousButtonClick(buttonPressed, window)        
                 buttonPressed = 4
+            
+            
 
             viewController.updatePlotOnCanvas(buttonPressed, window) 
             viewController.updateRightColumnElements(buttonPressed, window)
