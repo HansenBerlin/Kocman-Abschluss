@@ -3,4 +3,4 @@ from MainViewTwo import MainViewTwo
 
 
 MainView.initMainWindow()
-#MainViewTwo.initMainWindow()
+MainViewTwo.initMainWindow()
