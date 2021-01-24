@@ -42,7 +42,7 @@ class ViewController(object):
         if self.currentPage < 7:
             if self.currentPage != 0: 
                 self.mainController.updateAvailableOptions(self.propsData, buttonClicked, self.currentPage)
-            self.configController.updatePartIndexValues(self.propsData)
+            #self.configController.updatePartIndexValues(self.propsData)
             self.updatePlotOnCanvas(buttonClicked, window)
             self.currentPage+=1
             self.updateLeftColumnElements(window)
@@ -52,7 +52,7 @@ class ViewController(object):
 
     def updatePageAndElementsOnPreviousButtonClick(self, buttonClicked, window):  
         self.mainController.updateAvailableOptions(self.propsData, buttonClicked, self.currentPage)
-        self.configController.updatePartIndexValues(self.propsData)
+        #self.configController.updatePartIndexValues(self.propsData)
         self.updatePlotOnCanvas(buttonClicked, window) 
         self.currentPage-=1
         self.updateLeftColumnElements(window)
@@ -111,7 +111,7 @@ class ViewController(object):
         self.propsData.savedButtonChoices[self.currentPage-1]=buttonClicked
         self.configController.updatePartIndexValues(self.propsData)
         self.plotBuilder.buildRadarChart(self.plotBuilder.createDataSet(self.propsData.partIndexValues))
-        window[keyDic[12]].update('plotImages/radarplotUserSelection4.png')
+        window[keyDic[12]].update('ressources/radarplotUserSelection.png')
 
     def updateTicks(self, buttonClicked, window):
         for i in range(3):

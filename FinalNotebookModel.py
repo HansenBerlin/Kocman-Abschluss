@@ -122,21 +122,22 @@ class FinalNotebookModel:
                                    
     def createConfigArray(self):
         finalConfigurationOnView = []
+        print(self.finalConfig)
         for i in range(8):
             if self.finalConfig[i]<0: self.finalConfig[i] = 0
-            elif self.finalConfig[i]>7: self.finalConfig[i] = 7
+            elif self.finalConfig[i]>8: self.finalConfig[i] = 8
             if i == 1:
                 if AvailableOptionsModel.getFinalConfigState()[5] == 'Business-Level':
-                    finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]+1]*1.2)
+                    finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]]*1.2)
                 elif AvailableOptionsModel.getFinalConfigState()[5] == 'Outdoor/Special':
-                    finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]+1]*1.5)
-                else: finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]+1])
+                    finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]]*1.5)
+                else: finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]])
             elif i == 7:
                 if AvailableOptionsModel.getFinalConfigState()[0] == 'Professional':
-                    finalConfigurationOnView.append(self.availableGPUIfProfessionalDict[self.finalConfig[i]+1])
-                else: finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]+1])
-            else: finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]+1])
-        finalConfigurationOnView.append(self.dictionaryCollection[8][self.finalConfig[0]+1])
+                    finalConfigurationOnView.append(self.availableGPUIfProfessionalDict[self.finalConfig[i]])
+                else: finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]])
+            else: finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]])
+        finalConfigurationOnView.append(self.dictionaryCollection[8][self.finalConfig[0]])
 
         return finalConfigurationOnView
 

@@ -3,7 +3,6 @@ from FinalNotebookModel import FinalNotebookModel
 from ImageData import ImageData
 import PySimpleGUI as gui
 from AvailableOptionsModel import AvailableOptionsModel
-from ViewController import ViewController
 
 
 class FinalNotebookView():
@@ -19,7 +18,7 @@ class FinalNotebookView():
         infoTextCurrentUserSelection =   gui.Text('                                                                                          \n \n \n \n \n \n', font='Consolas 10', background_color='#eef5ef', text_color='black', key='textRightColumnInfoFinalSelection', pad=([20,0],[0,0]))
         headingLeftColumn = gui.Text('Ihre optimale Konfiguration', background_color='#252525', text_color='white', border_width=15, size=(45,1), justification='center', key='headingLeftColumn', pad=([81,0],[35,25]))
         headingRightColumn = gui.Text('Leistungsindex', text_color='white', background_color='#252525', border_width=15, size=(33,1), justification='center', pad=([81,0],[35,25]))
-        plotCanvas = gui.Image(key='plotCanvas', pad=([0,0],[20,0]), size=(500,400), background_color='#eef5ef', filename='plotImages/radarplotUserSelection4.png')    
+        plotCanvas = gui.Image(key='plotCanvas', pad=([0,0],[20,0]), size=(500,400), background_color='#eef5ef', filename='ressources/radarplotUserSelection.png')    
 
         fileNameImageDict= {
                         0: 'ressources/tick.png',
@@ -80,7 +79,7 @@ class FinalNotebookView():
                text_color='black')
         rightColumn = [[gui.Column([[headingRightColumn],[infoTextRowNamesUserSelection, infoTextCurrentUserSelection],[plotCanvas]])]]
         layout = [[gui.Column(leftColumn, size=(600, 700)), gui.VerticalSeparator(), gui.Column(rightColumn, size=(500, 700))]]
-        window = gui.Window('PC Builder', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.buttonUsedForThree, font='Consolas', finalize=True)
+        window = gui.Window('Notebook-Builder for Noobs', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.buttonUsedForThree, font='Consolas', finalize=True)
         
         viewController.updateComponentsInFinalView(window, infoTextKeysDict)
         
