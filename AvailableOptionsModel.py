@@ -10,20 +10,29 @@ class AvailableOptionsModel(object):
         savedIndexValues = parts
         print('------------------------------------------')
         print('GLOBAL config state SET, index values:')
+        print(savedConfigFinalState)
+        print('------------------------------------------')
+        print('------------------------------------------')
+        print('GLOBAL savedIndexValues SET:')
         print(savedIndexValues)
         print('------------------------------------------')
+
+    def setParts(parts):
+        global savedIndexValues
+        savedIndexValues = parts
+        
 
     def getFinalConfigState():   
         print('------------------------------------------')
         print('GLOBAL config state GET, index values:')
-        print(savedIndexValues)
+        print(savedConfigFinalState)
         print('------------------------------------------')     
         return savedConfigFinalState
 
     def getSavedIndexValues():
         print('------------------------------------------')
         print('GLOBAL saved index values final GET:')
-        print(savedConfigFinalState)
+        print(savedIndexValues)
         print('------------------------------------------')
         return savedIndexValues
 

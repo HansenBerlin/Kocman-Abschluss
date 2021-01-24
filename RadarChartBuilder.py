@@ -16,19 +16,13 @@ cD = {
 class RadarChartBuilder(object):
 
     def __init__(self):
-        self.categories = ['Rechenleistung', 'Preis', 'Gewicht', 'Lautstärke', 'Robustheit', 'Speicher', 'Akku', 'Grafikleistung']    
-    
-
+        self.categories = ['Rechenleistung', 'Preis', 'Gewicht', 'Lautstärke', 'Robustheit', 'Speicher', 'Akku', 'Grafikleistung']   
+        
 
     def createDataSet(self, indexedValues):
-        #Werte unter 1 und über 6 bereinigen (kann in Extremfällen passieren)
-       # print('values before:')
-       # print(indexedValues)
+    
         for i in range(8):
-            if indexedValues[i] < 1: indexedValues[i] = 1
-            #elif localValues[i] > 6: localValues[i] = 6
-      #  print('values after: ')
-      #  print(indexedValues)
+            if indexedValues[i] < 1: indexedValues[i] = 1    
         dataSet=[[1,1,1,1,1,1,1,1],[],[],[],[],[],[],[]]
         for i in range(1,8):
             for j in range(8):
@@ -71,73 +65,3 @@ class RadarChartBuilder(object):
             paper_bgcolor='#eef5ef'            
         )
         fig.write_image("ressources/radarplotUserSelection.png", 'png', 'kaleido', width = 500, height = 400)
-
-'''
-        fig.add_trace(go.Barpolar(
-            r = dataSet[0],
-            theta = self.categories,
-            marker_color = [cD[1],cD[8],cD[8],cD[8],cD[1],cD[1],cD[1],cD[1]],
-            marker_line_color = "black",
-            marker_line_width = 1,
-            opacity = 1.0
-        ))
-        fig.add_trace(go.Barpolar(
-            r = dataSet[1],            
-            theta = self.categories,
-            marker_color = [cD[2],cD[7],cD[7],cD[7],cD[2],cD[2],cD[2],cD[2]],
-            marker_line_color = "black",
-            marker_line_width = 1,
-            opacity = 1.0
-        ))  
-        fig.add_trace(go.Barpolar(
-            r = dataSet[2],            
-            theta = self.categories,
-            marker_color = [cD[3],cD[6],cD[6],cD[6],cD[3],cD[3],cD[3],cD[3]],
-            marker_line_color = "black",
-            marker_line_width = 1,
-            opacity = 1.0
-        ))  
-        fig.add_trace(go.Barpolar(
-            r = dataSet[3],            
-            theta = self.categories,
-            marker_color = [cD[4],cD[5],cD[5],cD[5],cD[4],cD[4],cD[4],cD[4]],
-            marker_line_color = "black",
-            marker_line_width = 1,
-            opacity = 1.0
-        ))  
-        fig.add_trace(go.Barpolar(
-            r = dataSet[4],            
-            theta=self.categories,
-            marker_color = [cD[5],cD[4],cD[4],cD[4],cD[5],cD[5],cD[5],cD[5]],
-            marker_line_color = "black",
-            marker_line_width = 1,
-            opacity = 1.0
-        ))  
-        fig.add_trace(go.Barpolar(
-            r = dataSet[5],           
-            theta = self.categories,
-            marker_color = [cD[6],cD[3],cD[3],cD[3],cD[6],cD[6],cD[6],cD[6]],
-            marker_line_color = "black",
-            marker_line_width = 1,
-            opacity = 1.0
-        ))   
-        fig.add_trace(go.Barpolar(
-            r = dataSet[6],           
-            theta = self.categories,
-            marker_color = [cD[7],cD[2],cD[2],cD[2],cD[7],cD[7],cD[7],cD[7]],
-            marker_line_color = "black",
-            marker_line_width = 1,
-            opacity = 1.0
-        ))  
-        fig.add_trace(go.Barpolar(
-            r = dataSet[7],           
-            theta = self.categories,
-            marker_color = [cD[8],cD[1],cD[1],cD[1],cD[8],cD[8],cD[8],cD[8]],
-            marker_line_color = "black",
-            marker_line_width = 1,
-            opacity = 1.0
-        ))      
-        '''
-       
-
-    

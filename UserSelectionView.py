@@ -76,7 +76,7 @@ class UserSelectionView():
             
             
 
-            viewController.updatePlotOnCanvas(buttonPressed, window) 
+            viewController.updatePlotOnCanvas(buttonPressed, window, False) 
             viewController.updateRightColumnElements(buttonPressed, window)
             viewController.checkPrevAndNextButtonStates(buttonPressed, window)  
             viewController.updateTicks(buttonPressed, window)  

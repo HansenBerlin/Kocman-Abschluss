@@ -96,12 +96,12 @@ class FinalNotebookModel:
         self.availableCoolerSystemDict = {
             1: 'passiv',
             2: 'passiv',
-            3: 'passiv',
-            4: '1 CPU Lüfter',
-            5: '1 CPU Lüfter',
-            6: '1 CPU Lüfter, 1 Gehäuselüfter',
-            7: '1 CPU Lüfter, 1 Gehäuselüfter',
-            8: '3 Lüfter'
+            3: 'Lüfter: 1*Gehäuse',
+            4: 'Lüfter: 1*Gehäuse',
+            5: 'Lüfter: 1*Gehäuse',
+            6: 'Lüfter: 1*Gehäuse',
+            7: 'Lüfter: 2*Gehäuse',
+            8: 'Lüfter: 2*Gehäuse',
         }
 
         self.pricesDict = {   
@@ -118,30 +118,6 @@ class FinalNotebookModel:
         self.dictionaryCollection = [self.availableProcessorsDict, self.pricesDict, self.availableScreenDict, 
                                     self.availableCoolerSystemDict, self.availableCaseDict, self.availableStorageDict, 
                                     self.availableBatteryDict, self.availableGPUDict, self.availableRamDict]
-
-                                   
-    def createConfigArray(self):
-        finalConfigurationOnView = []
-        print(self.finalConfig)
-        for i in range(8):
-            if self.finalConfig[i]<0: self.finalConfig[i] = 0
-            elif self.finalConfig[i]>8: self.finalConfig[i] = 8
-            if i == 1:
-                if AvailableOptionsModel.getFinalConfigState()[5] == 'Business-Level':
-                    finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]]*1.2)
-                elif AvailableOptionsModel.getFinalConfigState()[5] == 'Outdoor/Special':
-                    finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]]*1.5)
-                else: finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]])
-            elif i == 7:
-                if AvailableOptionsModel.getFinalConfigState()[0] == 'Professional':
-                    finalConfigurationOnView.append(self.availableGPUIfProfessionalDict[self.finalConfig[i]])
-                else: finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]])
-            else: finalConfigurationOnView.append(self.dictionaryCollection[i][self.finalConfig[i]])
-        finalConfigurationOnView.append(self.dictionaryCollection[8][self.finalConfig[0]])
-
-        return finalConfigurationOnView
-
-        
 
 
 

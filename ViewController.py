@@ -1,9 +1,10 @@
+from FinalPartsConfigurationController import FinalPartsConfigurationController
 from RadarChartBuilder import RadarChartBuilder
 from ConfigurationController import ConfigurationController
 from AvailableOptionsModel import AvailableOptionsModel
 from CombineOptionsController import CombineOptionsController
 from ImageDataModel import ImageData
-from FinalNotebookModel import FinalNotebookModel
+from FinalPartsConfigurationController import FinalPartsConfigurationController
 
 
 
@@ -34,7 +35,7 @@ class ViewController(object):
         self.mainController = CombineOptionsController(self.propsData) 
         self.configController = ConfigurationController()
         self.plotBuilder = RadarChartBuilder()
-        self.finalNotebookData = FinalNotebookModel()
+        self.finalNotebookData = FinalPartsConfigurationController()
 
 
    
@@ -43,7 +44,7 @@ class ViewController(object):
             if self.currentPage != 0: 
                 self.mainController.updateAvailableOptions(self.propsData, buttonClicked, self.currentPage)
             #self.configController.updatePartIndexValues(self.propsData)
-            self.updatePlotOnCanvas(buttonClicked, window)
+            self.updatePlotOnCanvas(buttonClicked, window, False)
             self.currentPage+=1
             self.updateLeftColumnElements(window)
             self.updateRightColumnElements(buttonClicked, window)
@@ -53,7 +54,7 @@ class ViewController(object):
     def updatePageAndElementsOnPreviousButtonClick(self, buttonClicked, window):  
         self.mainController.updateAvailableOptions(self.propsData, buttonClicked, self.currentPage)
         #self.configController.updatePartIndexValues(self.propsData)
-        self.updatePlotOnCanvas(buttonClicked, window) 
+        self.updatePlotOnCanvas(buttonClicked, window, False) 
         self.currentPage-=1
         self.updateLeftColumnElements(window)
         self.updateRightColumnElements(4, window)  
@@ -107,10 +108,20 @@ class ViewController(object):
     #    self.plotBuilder.buildRadarChart(self.plotBuilder.createDataSet(self.propsData.partIndexValues))
     #    window[keyDic[12]].update('plotImages/radarplotUserSelection4.png')
 
-    def updatePlotOnCanvas(self, buttonClicked, window): 
-        self.propsData.savedButtonChoices[self.currentPage-1]=buttonClicked
+    def updatePlotOnCanvas(self, buttonClicked, window, finalView):
+        if not finalView: self.propsData.savedButtonChoices[self.currentPage-1]=buttonClicked
         self.configController.updatePartIndexValues(self.propsData)
-        self.plotBuilder.buildRadarChart(self.plotBuilder.createDataSet(self.propsData.partIndexValues))
+        if finalView: 
+            print('++++++++++++++++++++++++++++++++++++')
+            
+            print('++++++++++++++++++++++++++++++++++++')
+            self.plotBuilder.buildRadarChart(self.plotBuilder.createDataSet(AvailableOptionsModel.getSavedIndexValues()))
+        else: 
+            print('++++++++++++++++++++++++++++++++++++')
+            print('++++++++++++++++++++++++++++++++++++')
+            self.plotBuilder.buildRadarChart(self.plotBuilder.createDataSet(self.propsData.partIndexValues))
+        
+
         window[keyDic[12]].update('ressources/radarplotUserSelection.png')
 
     def updateTicks(self, buttonClicked, window):
@@ -120,7 +131,9 @@ class ViewController(object):
             window[keyDic[buttonClicked+12]].update('ressources/tick.png')
 
     def updateComponentsInFinalView(self, window, keyDict):
+        self.finalNotebookData.adjustIndexValues()
         finalComponentList = self.finalNotebookData.createConfigArray()
+        self.updatePlotOnCanvas(-1, window, True)
         window[keyDict[0]].update(finalComponentList[4])
         window[keyDict[1]].update(finalComponentList[0])
         window[keyDict[2]].update(finalComponentList[8])

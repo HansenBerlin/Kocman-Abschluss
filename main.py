@@ -1,5 +1,7 @@
 from UserSelectionView import UserSelectionView
 
+UserSelectionView.initMainWindow()
+
 try: 
     UserSelectionView.initMainWindow()
 except: 
