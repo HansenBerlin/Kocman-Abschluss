@@ -1,6 +1,6 @@
 from ViewController import ViewController
 from FinalNotebookModel import FinalNotebookModel
-from ImageData import ImageData
+from ImageDataModel import ImageData
 import PySimpleGUI as gui
 from AvailableOptionsModel import AvailableOptionsModel
 

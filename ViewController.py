@@ -2,7 +2,7 @@ from RadarChartBuilder import RadarChartBuilder
 from ConfigurationController import ConfigurationController
 from AvailableOptionsModel import AvailableOptionsModel
 from CombineOptionsController import CombineOptionsController
-from ImageData import ImageData
+from ImageDataModel import ImageData
 from FinalNotebookModel import FinalNotebookModel
 
 
