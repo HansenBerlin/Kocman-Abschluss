@@ -4,8 +4,8 @@ from ImageDataModel import ImageData
 import PySimpleGUI as gui
 from FinalNotebookView import FinalNotebookView
 
-
 class UserSelectionView():
+
     def initMainWindow():
 
         viewController = ViewController()
@@ -44,7 +44,7 @@ class UserSelectionView():
         leftColumn = [[headingLeftColumn], [gui.Column(leftLeftColumn), gui.Column(leftCenterColumn), gui.Column(leftRightColumn)],[buttonPrevious, buttonNext, buttonConfirm]]
         rightColumn = [[gui.Column([[headingRightColumn],[infoTextRowNamesUserSelection, infoTextCurrentUserSelection],[plotCanvas]])]]
         layout = [[gui.Column(leftColumn, size=(600, 700)), gui.VerticalSeparator(), gui.Column(rightColumn, size=(500, 700))]]
-        window = gui.Window('Notebook-Builder for Noobs', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.buttonUsedForThree, font='Consolas', finalize=True)
+        window = gui.Window('Notebook-Builder for Noobs', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.iconMainWindow, font='Consolas', finalize=True)
         window.hide()
 
         #initialize, später löschen

@@ -54,7 +54,7 @@ class RadarChartBuilder(object):
                 marker_color = [cD[i+1],cD[j],cD[j],cD[j],cD[i+1],cD[i+1],cD[i+1],cD[i+1]],
                 marker_line_color = "black",
                 marker_line_width = 1,
-                opacity = 1.0
+                opacity = 0.8
             ))
             j-=1
 
