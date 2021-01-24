@@ -56,7 +56,7 @@ class ViewController(object):
         self.updatePlotOnCanvas(buttonClicked, window) 
         self.currentPage-=1
         self.updateLeftColumnElements(window)
-        self.updateRightColumnElements(buttonClicked, window)  
+        self.updateRightColumnElements(4, window)  
 
 
     def updateButtonValues(self, button, returnTextValue, returnHeaderValue):
