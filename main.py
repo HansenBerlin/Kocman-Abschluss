@@ -1,6 +1,8 @@
 from UserSelectionView import UserSelectionView
 
-UserSelectionView.initMainWindow()
+'''Programmaufbau siehe beiliegende Dokumentation, die wichtigsten 
+Funktionen sind zusätzlich im Code dokumentiert
+Repo: https://github.com/HansenBerlin/Kocman-Abschluss'''
 
 try: 
     UserSelectionView.initMainWindow()
@@ -11,6 +13,5 @@ except:
     'PySimpleGUI        <pip install PySimpleGUI>\n'+
     'Plotly Express     <pip install plotly-express>\n'+
     'Kaleido            <pip install kaleido>\n'+
-    'Pandas             <pip install pandas>'
-    )
+    'Pandas             <pip install pandas>')
 

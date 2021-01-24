@@ -1,6 +1,7 @@
 from FinalNotebookModel import FinalNotebookModel
 from AvailableOptionsModel import AvailableOptionsModel
 
+
 class FinalPartsConfigurationController:
     
     def __init__(self):

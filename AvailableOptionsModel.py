@@ -1,39 +1,30 @@
+  '''In dieser Klasse werden alle Nutzerentscheidungen gespeichert, also die akuell gewählten Präferenzen,
+  die daraus folgenden aktuellen Indexwerte für das Erstellen des Graphen und einige Daten für die GUI.
+  Da die Indexwerte und aktuelle Auswahl global von anderen Klassen benötigt werden, sind auch getter und setter
+  Methoden enthalten'''
+
 savedConfigFinalState = []
 savedIndexValues = []
 
-class AvailableOptionsModel(object):   
+class AvailableOptionsModel(object):     
 
     def setFinalConfigState(config, parts):
         global savedConfigFinalState
         global savedIndexValues
         savedConfigFinalState = config
         savedIndexValues = parts
-        print('------------------------------------------')
-        print('GLOBAL config state SET, index values:')
-        print(savedConfigFinalState)
-        print('------------------------------------------')
-        print('------------------------------------------')
-        print('GLOBAL savedIndexValues SET:')
-        print(savedIndexValues)
-        print('------------------------------------------')
+        
 
     def setParts(parts):
         global savedIndexValues
         savedIndexValues = parts
-        
 
-    def getFinalConfigState():   
-        print('------------------------------------------')
-        print('GLOBAL config state GET, index values:')
-        print(savedConfigFinalState)
-        print('------------------------------------------')     
+
+    def getFinalConfigState():               
         return savedConfigFinalState
 
-    def getSavedIndexValues():
-        print('------------------------------------------')
-        print('GLOBAL saved index values final GET:')
-        print(savedIndexValues)
-        print('------------------------------------------')
+
+    def getSavedIndexValues():        
         return savedIndexValues
 
 

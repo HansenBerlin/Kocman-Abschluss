@@ -3,7 +3,6 @@ class ConfigurationController(object):
     def updatePartIndexValues(self, propsData): 
         #Anpassen der Indexwerte je nach Nutzerauswahl anhand untenstehender Tabelle   
         propsData.partIndexValues = [3,3,3,3,3,3,3,3]         
-       # propsData.partIndexValues = [8,8,8,8,8,8,8,8]         
 
         for i in range(8):
             lookupColumn = 0 

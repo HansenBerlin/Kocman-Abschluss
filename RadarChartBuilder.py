@@ -1,5 +1,4 @@
 import plotly.graph_objects as go
-import os
 
 # Höherer Farbindex=bessere Leistung; cD = Colordictionary
 cD = {     
@@ -17,10 +16,13 @@ class RadarChartBuilder(object):
 
     def __init__(self):
         self.categories = ['Rechenleistung', 'Preis', 'Gewicht', 'Lautstärke', 'Robustheit', 'Speicher', 'Akku', 'Grafikleistung']   
-        
 
-    def createDataSet(self, indexedValues):
-    
+
+    '''Erstellen des Datensets aus den aktuellen Indexwerten. Ein zweidimensionaler Array wird aufgebaut, die Werte des 
+    Arrays an Index 0 sind alle 1, damit im Graphen keine Nullwerte angezeigt werden. Danach werden die weiteren Arrays aufgebaut
+    und spaltenweise mit Einsen befüllt solange der Wert des übergebenen Indexvalues an der jeweiligen Position noch größer oder
+    gleich der Reihe des zu befüllenden Arrays ist'''
+    def createDataSet(self, indexedValues):    
         for i in range(8):
             if indexedValues[i] < 1: indexedValues[i] = 1    
         dataSet=[[1,1,1,1,1,1,1,1],[],[],[],[],[],[],[]]
@@ -32,12 +34,11 @@ class RadarChartBuilder(object):
         return dataSet
 
 
-    def createDirectory(self):
-        try: 
-            if not os.path.exists("ressources"): os.mkdir("ressources")
-        except: print('Konnte Pfad nicht erstellen. Bitte im selben Verzeichnis wie diese Dateien einen Ordner mit dem Namen plotImages erstellen.')
+
     
-    
+    '''Erstellen des Graphen durch einen Loop. Die Farben werden unterschiedlich gesetzt, je nachdem ob ein 
+    hoher Wert gut oder schlecht ist. Anschließend wird der Graph in eine Bilddatei umgewandelt, weil der dynamische 
+    Graph mit dieser UI-Bibliothek nicht ohne weiteres angezeigt werden kann.'''
     def buildRadarChart(self, dataSet):
         fig = go.Figure()
         j = 8
@@ -46,9 +47,9 @@ class RadarChartBuilder(object):
                 r = dataSet[i],
                 theta = self.categories,
                 marker_color = [cD[i+1],cD[j],cD[j],cD[j],cD[i+1],cD[i+1],cD[i+1],cD[i+1]],
-                marker_line_color = "black",
+                marker_line_color = "#181818",
                 marker_line_width = 1,
-                opacity = 0.8
+                opacity = 0.9
             ))
             j-=1
 

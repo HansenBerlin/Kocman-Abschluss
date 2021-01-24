@@ -1,5 +1,8 @@
 from AvailableOptionsModel import AvailableOptionsModel
 
+'''Klasse zum Speichern aller Daten der technischen Komponenten, die dann je nach enststandenem
+Leistungsindex an entsprechender Position vom FinalPartsConfiguration Controller abgeholt werden'''
+
 class FinalNotebookModel:
     
     def __init__(self):
@@ -91,7 +94,8 @@ class FinalNotebookModel:
             5: 'Laufzeit (Durchschn.: 7 Std.)',
             6: 'Laufzeit (Durchschn.: 10 Std.)',
             7: 'Laufzeit (Durchschn.: 12 Std.)',
-            8: 'Laufzeit (Durchschn.: >12 Std.)',       }        
+            8: 'Laufzeit (Durchschn.: >12 Std.)',       
+        }        
 
         self.availableCoolerSystemDict = {
             1: 'passiv',
@@ -121,6 +125,5 @@ class FinalNotebookModel:
 
 
 
-       # self.categories = ['Rechenleistung', 'Preis', 'Gewicht', 'Lautstärke', 'Robustheit', 'Speicher', 'Akku', 'Grafikleistung']    
 
 
