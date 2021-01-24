@@ -21,15 +21,15 @@ class FinalNotebookView():
         plotCanvas = gui.Image(key='plotCanvas', pad=([0,0],[20,0]), size=(500,400), background_color='#eef5ef', filename='ressources/radarplotUserSelection.png')    
 
         fileNameImageDict= {
-                        0: 'ressources/tick.png',
-                        1: 'ressources/tick.png',
-                        2: 'ressources/tick.png',
-                        3: 'ressources/tick.png',
-                        4: 'ressources/tick.png',
-                        5: 'ressources/tick.png',
-                        6: 'ressources/tick.png',
-                        7: 'ressources/tick.png',
-                        8: 'ressources/tick.png'
+                        0: 'ressources/parts (1).png',
+                        1: 'ressources/parts (7).png',
+                        2: 'ressources/parts (6).png',
+                        3: 'ressources/parts (4).png',
+                        4: 'ressources/parts (2).png',
+                        5: 'ressources/parts (9).png',
+                        6: 'ressources/parts (3).png',
+                        7: 'ressources/parts (5).png',
+                        8: 'ressources/parts (8).png'
         }
 
         headingTextDict= {
@@ -60,7 +60,7 @@ class FinalNotebookView():
 
         colLeft = []      
         for i in range(9):
-            colLeft.append([gui.Image(pad=([80,0],[5,5]), size=(30,30), background_color='#eef5ef', filename=fileNameImageDict[i])])
+            colLeft.append([gui.Image(pad=([80,0],[4,4]), size=(32,32), background_color='#eef5ef', filename=fileNameImageDict[i])])
 
         colCenter = []      
         for i in range(9):
