@@ -10,7 +10,8 @@ class FinalPartsConfigurationController:
 
 
     '''Diese Funktion erstellt aus den Dictionarys der Notebook Datenklasse eine Liste mit den finalen, konkreten Teilen
-    die verbaut werden sollen. Dabei werden noch einige Anpassungen des Preises und der Grafikkarte vorgenommen  '''
+    die verbaut werden sollen. Dabei werden noch einige Anpassungen des Preises und der Grafikkarte vorgenommen,
+    am Preis insbesondere dann wenn keine Präferenzen angegeben wurden'''    
     def createConfigArray(self):
             finalConfigurationOnView = []   
 
@@ -59,4 +60,24 @@ class FinalPartsConfigurationController:
 
         # wenn Outdoor/Special gewählt wurde und der Akkuindexwert sehr niedrig ist, den Indexwert der Akkuleistung nach oben anpassen
         if AvailableOptionsModel.getFinalConfigState()[5]=='Outdoor/Special' and self.indexValues[6] < 3: self.indexValues[6]+=2
+
+        self.indexValues[1] = self.adjustPrice()
+
+    
+    def adjustPrice(self):
+        price = 0
+        for i in range(8):
+            if i not in (1,2,3):
+                price += self.indexValues[i]-4
+                print('{}{}'.format('price raised to', price))
+            elif i != 1: 
+                price += 2-self.indexValues[i]
+                print('{}{}'.format('price reduced to', price))
+
+
+        price = round(price/8, 0)        
+        return price + self.indexValues[1]    
+    
+    # Liste Reihenfolge ['Rechenleistung', 'Preis', 'Gewicht', 'Lautstärke', 'Robustheit', 'Speicher', 'Akku', 'Grafikleistung']    
+
 

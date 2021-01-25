@@ -1,4 +1,3 @@
-from AvailableOptionsModel import AvailableOptionsModel
 
 '''Klasse zum Speichern aller Daten der technischen Komponenten, die dann je nach enststandenem
 Leistungsindex an entsprechender Position vom FinalPartsConfiguration Controller abgeholt werden'''
@@ -6,8 +5,6 @@ Leistungsindex an entsprechender Position vom FinalPartsConfiguration Controller
 class FinalNotebookModel:
     
     def __init__(self):
-
-        self.finalConfig = AvailableOptionsModel.getSavedIndexValues()
 
         self.availableCaseDict = {
             1: 'Plastik',

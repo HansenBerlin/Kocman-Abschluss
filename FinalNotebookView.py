@@ -56,27 +56,29 @@ class FinalNotebookView():
 
 
         colLeft = []      
-        for i in range(9):
-            colLeft.append([gui.Image(pad=([80,0],[4,4]), size=(32,32), background_color='#eef5ef', filename=fileNameImageDict[i])])
+        for i in range(9): colLeft.append([gui.Image(pad=([80,0],[4,4]), size=(32,32), background_color='#eef5ef', filename=fileNameImageDict[i])])
 
         colCenter = []      
-        for i in range(9):
-            colCenter.append([gui.Text(headingTextDict[i], pad=([20,0],[12,11]), font='Consolas 10', background_color='#eef5ef', text_color='black')])   
+        for i in range(9): colCenter.append([gui.Text(headingTextDict[i], pad=([20,0],[12,11]), font='Consolas 10', background_color='#eef5ef', text_color='black')])   
 
         colRight = []      
-        for i in range(9):
-            colRight.append([gui.Text('                                                        ', pad=([20,0],[12,11]), font='Consolas 10', background_color='#eef5ef', text_color='black', key=infoTextKeysDict[i])])       
+        for i in range(9): colRight.append([gui.Text('                                                        ', pad=([20,0],[12,11]), 
+                            font='Consolas 10', background_color='#eef5ef', text_color='black', key=infoTextKeysDict[i])])       
         
-        leftColumn = [[headingLeftColumn], [gui.Column(colLeft, background_color='#eef5ef'), gui.Column(colCenter, background_color='#eef5ef'), gui.Column(colRight, background_color='#eef5ef')],[buttonConfirm]]
+        leftColumn = [[headingLeftColumn], [gui.Column(colLeft, background_color='#eef5ef'), 
+                    gui.Column(colCenter, background_color='#eef5ef'), 
+                    gui.Column(colRight, background_color='#eef5ef')],[buttonConfirm]]
 
         #evtl in window/layout rein
         gui.SetOptions(background_color='#eef5ef',      
                use_ttk_buttons=True,
                button_color=('white', '#66bb6a'),
                text_color='black')
+
         rightColumn = [[gui.Column([[headingRightColumn],[infoTextRowNamesUserSelection, infoTextCurrentUserSelection],[plotCanvas]])]]
         layout = [[gui.Column(leftColumn, size=(600, 700)), gui.VerticalSeparator(), gui.Column(rightColumn, size=(500, 700))]]
-        window = gui.Window('Notebook-Builder for Noobs', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.iconMainWindow, font='Consolas', finalize=True)
+        window = gui.Window('Notebook-Builder for Noobs', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, 
+                use_default_focus=False, icon=imageData.iconMainWindow, font='Consolas', finalize=True)
         
         viewController.updateComponentsInFinalView(window, infoTextKeysDict)
         
