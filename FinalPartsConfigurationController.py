@@ -27,18 +27,18 @@ class FinalPartsConfigurationController:
                 elif self.indexValues[i]>8: self.indexValues[i] = 8
 
                 if i == 1:
-                    # Anpassen des Preises um 20 bzw 50% nach oben wenn Business oder Outdoor/Spezial ausgewählt wird
+                    # Anpassen des Preises um 10 bzw 30% nach oben wenn Business oder Outdoor/Spezial ausgewählt wird
                     if AvailableOptionsModel.getFinalConfigState()[5] == 'Business-Level':
-                        finalConfigurationOnView.append(self.notebookModel.dictionaryCollection[i][self.indexValues[i]]*1.2)
+                        finalConfigurationOnView.append(round(self.notebookModel.dictionaryCollection[i][self.indexValues[i]]*1.1, 0))
                     elif AvailableOptionsModel.getFinalConfigState()[5] == 'Outdoor/Special':
-                        finalConfigurationOnView.append(self.notebookModel.dictionaryCollection[i][self.indexValues[i]]*1.5)
+                        finalConfigurationOnView.append(self.notebookModel.dictionaryCollection[i][self.indexValues[i]]*1.3)
                     else: finalConfigurationOnView.append(self.notebookModel.dictionaryCollection[i][self.indexValues[i]])
 
                 elif i == 7:
                     # Anpassen der Grafikkarte im hohen Qualitätssegment je nach angegebenen Nutzen (normale bzw. Workstationkarte)
                     # und bei einer Konfiguration mit hoher Grafikleistung und geringer Lautstärke Anpassen des Lüfters
                     if AvailableOptionsModel.getFinalConfigState()[0] == 'Professional':
-                        finalConfigurationOnView.append(self.notebookModel.dictionaryCollection[7][self.indexValues[i]])
+                        finalConfigurationOnView.append(self.notebookModel.dictionaryCollection[i][self.indexValues[i]])
                     else: finalConfigurationOnView.append(self.notebookModel.dictionaryCollection[i][self.indexValues[i]]) 
 
                 # Anpassen aller restlichen Werte bis auf den Ram (außerhalb der Listenlänge)
@@ -61,22 +61,58 @@ class FinalPartsConfigurationController:
         # wenn Outdoor/Special gewählt wurde und der Akkuindexwert sehr niedrig ist, den Indexwert der Akkuleistung nach oben anpassen
         if AvailableOptionsModel.getFinalConfigState()[5]=='Outdoor/Special' and self.indexValues[6] < 3: self.indexValues[6]+=2
 
-        self.indexValues[1] = self.adjustPrice()
+        self.indexValues[1] = self.adjustPriceTwo()
 
     
     def adjustPrice(self):
         price = 0
         for i in range(8):
             if i not in (1,2,3):
-                price += self.indexValues[i]-4
+                price += self.indexValues[i]
                 print('{}{}'.format('price raised to', price))
             elif i != 1: 
-                price += 2-self.indexValues[i]
+                price -= self.indexValues[i]
                 print('{}{}'.format('price reduced to', price))
+        if price != 0: price = round(price/5, 0)
+        else: price = 0
+
+        # abfangen, dass das Ergebnis plus Preis nicht kleiner als 1 ist
+        print('{}{}'.format('at index:', self.indexValues[1]))
+
+        if price + self.indexValues[1] < 1: return 1
+        else: return price + self.indexValues[1]  
 
 
-        price = round(price/8, 0)        
-        return price + self.indexValues[1]    
+    def adjustPriceTwo(self):
+        priceOption = AvailableOptionsModel.getFinalConfigState()[1]
+        priceUp = 0
+        priceDown = 0
+        finalAdjustmentCalc = 0
+        for i in range(8):
+            if i not in (1,2,3):
+                priceUp += self.indexValues[i]
+                print('{}{}'.format('price raised to', priceUp))
+            elif i != 1: 
+                priceDown += self.indexValues[i]
+                print('{}{}'.format('price reduced to', priceDown))
+        priceUp = round(priceUp/5, 0)
+        priceDown = round(priceDown/3, 0)
+
+        print('{}{}'.format('PriceChange:', priceUp-priceDown))
+
+        finalAdjustmentCalc = priceUp-priceDown
+        if priceOption == 'niedrig': finalAdjustmentCalc+=1
+        elif priceOption == 'mittel': finalAdjustmentCalc-=1
+        elif priceOption == 'hoch': finalAdjustmentCalc-=2
+
+        print('{}{}'.format('final PriceChange:', finalAdjustmentCalc))
+        print('{}{}'.format('actual Price:', self.indexValues[1]))
+
+        #Preis irgendwie vergleichen/Faktor? Also Ergebnis müsste eigentlich dem aktuellen Preis entsprechen?
+
+
+        if finalAdjustmentCalc+self.indexValues[1]<1: return 1
+        else: return finalAdjustmentCalc+self.indexValues[1]
     
     # Liste Reihenfolge ['Rechenleistung', 'Preis', 'Gewicht', 'Lautstärke', 'Robustheit', 'Speicher', 'Akku', 'Grafikleistung']    
 
