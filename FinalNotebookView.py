@@ -5,7 +5,9 @@ import PySimpleGUI as gui
 import BuyConfirmationView as confirmView
 import sys
 
-
+'''Zweites Fenster mit der angepassten Leistungsübersicht und den Teilen, die aufgrund der Leistungsdaten gewählt wurden
+Die einzige Userinteraktion ist hier der Klick auf Kaufen, der ein weiteres Fenster aufruft. Hier nicht ganz sauber sind die Dictionarys
+die eigentlich in ein eigenes Model gehören, hatte aber jetzt keine Zeit mehr. :-)'''
 
 def initMainWindow(exitProgram, lastWindow):
     if exitProgram: sys.exit()
@@ -55,6 +57,8 @@ def initMainWindow(exitProgram, lastWindow):
     headingLeftColumn = gui.Text('Ihre optimale Konfiguration', background_color='#252525', text_color='white', border_width=15, size=(45,1), justification='center', key='headingLeftColumn', pad=([81,0],[35,25]))
     headingRightColumn = gui.Text('Leistungsindex', text_color='white', background_color='#252525', border_width=15, size=(33,1), justification='center', pad=([81,0],[35,25]))
     plotCanvas = gui.Image(key='plotCanvas', pad=([0,0],[20,0]), size=(500,400), background_color='#eef5ef', filename='ressources/radarplotUserSelection.png')      
+    
+    # Erstellung der Tabelle für die linke Seite des Fensters
     colLeft = []      
     for i in range(9): colLeft.append([gui.Image(pad=([80,0],[4,4]), size=(32,32), background_color='#eef5ef', filename=fileNameImageDict[i])])
     colCenter = []      
@@ -66,11 +70,12 @@ def initMainWindow(exitProgram, lastWindow):
     leftColumn = [[headingLeftColumn], [gui.Column(colLeft, background_color='#eef5ef'), 
                 gui.Column(colCenter, background_color='#eef5ef'), 
                 gui.Column(colRight, background_color='#eef5ef')],[buttonConfirm]]
-    #evtl in window/layout rein
+
     gui.SetOptions(background_color='#eef5ef',      
            use_ttk_buttons=True,
            button_color=('white', '#66bb6a'),
            text_color='black')
+
     rightColumn = [[gui.Column([[headingRightColumn],[infoTextRowNamesUserSelection, infoTextCurrentUserSelection],[plotCanvas]])]]
     layout = [[gui.Column(leftColumn, size=(600, 700)), gui.VerticalSeparator(), gui.Column(rightColumn, size=(500, 700))]]
     window = gui.Window('Notebook-Builder for Noobs', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, 

@@ -6,6 +6,9 @@ from FinalNotebookView import initMainWindow
 
 class UserSelectionView():
 
+    '''Hauptfenster mit Nutzerinteraktion zur Auswahl der Werte und aktualisierter Datenplot auf der rechten Seite. Alle Elemente
+    werden durch den Viewcontroller manipuliert'''
+
     def initMainWindow():
 
         viewController = ViewController()

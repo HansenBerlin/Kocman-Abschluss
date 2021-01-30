@@ -3,7 +3,7 @@ class ConfigurationController(object):
     '''Die Funktion erstellt anhand untenstehender Matrix ausgehend von den Eingaben des Nutzers
     die Indexwerte für den Graph und als spätere Grundlage der Teileauswahl. Pro Eingabe wird durch die 
     Zeile iteriert, jeweils in 3er Schritten +- Eingabe, und der Wert angepasst. Beispiel: Es wurde eine 
-    hohe Leistung gewünscht (Zeile 0,  Spalte 2: Wert 3), der Basiswert von 3 wird also auf 6 gesetzt.'''
+    hohe Leistung gewünscht (Zeile 0, Spalte 2: Wert 3), der Basiswert von 3 wird also auf 6 gesetzt.'''
     
     def updatePartIndexValues(self, propsData): 
         propsData.partIndexValues = [3,3,3,3,3,3,3,3]         

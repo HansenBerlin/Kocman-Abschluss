@@ -1,13 +1,16 @@
 class CombineOptionsController(object):    
 
+    '''Hauptlogik zur Steuerung der Buttons die ausgegraut werden. Die Laufvariable ist dabei die Seite,
+    selection repräsentiert den Button der gedrückt wurde. Der zweite Indexwert der jeweiligen Kategorie zwischen
+    0 und 2 ist der eingespeicherte Button für diese Runde. Diese Werte werden in allOptions[x][3] zusammengefasst.
+    Nach jedem Event wird der Array mit den Optionen genullt und aktualisiert um die Interaktion vorwärts und 
+    rückwärts zu ermöglichen. Index 3 von allOptions ist keine Präferenz, also kein gedrückter Button'''
+
     def __init__(self, props):   
         self.propsData = props
-        #self.propsData2 = AvailableOptionsModel()
-
 
     def updateAvailableOptions(self, propsData, buttonClicked, page):
         propsData.allOptions[page-1][2] = buttonClicked
-        # aktuelle Auswahl auf dieser Seite wird im Array gespeichert    
         for i in range(6):
             propsData.allOptions[i][3] = [False, False, False, False]  
 

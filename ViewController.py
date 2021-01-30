@@ -6,6 +6,8 @@ from CombineOptionsController import CombineOptionsController
 from ImageDataModel import ImageData
 from FinalPartsConfigurationController import FinalPartsConfigurationController
 
+'''Zentrale Klasse zur Manipulation der beiden MainViews und als Schnittstelle zu den anderen Controllern und Models
+Die jeweiligen Funktionen sind einzeln kommentiert'''
 
 keyDic = {
         1: 'buttonOne',
@@ -37,7 +39,9 @@ class ViewController(object):
         self.plotBuilder = RadarChartBuilder()
         self.finalNotebookData = FinalPartsConfigurationController()
 
-   
+    # Diese und die nächste Funktion ähneln sich und werden durch Klick auf den weiter oder Zurückbutton
+    # aufgerufen. Die Daten werden aktualisiert und der Plot, sowie die UI Elemente der linken Seite
+    # neu geladen
     def updatePageAndElementsOnNextButtonClick(self, buttonClicked, window):
         if self.currentPage < 7:
             if self.currentPage != 0: 
@@ -55,13 +59,15 @@ class ViewController(object):
         self.currentPage-=1
         self.updateLeftColumnElements(window)
 
-
+    # Update der Buttonwerte (an oder aus, aktualisierter Text und Überschrift)    
     def updateButtonValues(self, button, returnTextValue, returnHeaderValue):
         if returnTextValue: return self.propsData.allOptions[self.currentPage-1][1][button]
         elif returnHeaderValue: return self.propsData.allOptions[self.currentPage-1][0]
         else: return self.propsData.allOptions[self.currentPage-1][3][button]          
 
 
+    # Update der Fensterelemente, die Keys die diesen in der UserSelectionView zugewiesen sind
+    # werdn hier aus dem Dictionary abgerufen
     def updateLeftColumnElements(self, window):
         for i in range(3):
             window[keyDic[i+1]].update(image_data=self.imageData.buttonImageDictionary[self.currentPage][i])            
@@ -83,6 +89,8 @@ class ViewController(object):
         AvailableOptionsModel.setFinalConfigState(self.propsData.savedConfigurations, self.propsData.partIndexValues)
 
 
+    # Helfermethode um Abstürze zu vermeiden wenn die erste und letzte Seite erreicht sind und die Arrays
+    # out of index bounds geraten werden
     def checkPrevAndNextButtonStates(self, buttonClicked, window):
         if buttonClicked != 4: window[keyDic[10]].update(image_data = self.imageData.buttonNext)
         else: window[keyDic[10]].update(image_data = self.imageData.buttonNoPreference)
@@ -97,7 +105,7 @@ class ViewController(object):
             window[keyDic[10]].update(visible=True)
             window[keyDic[11]].update(visible=False)
    
-
+    # Update des Plots, abhängig davon ob die letzte Seite erreicht wurde oder noch Interaktionen möglich sind
     def updatePlotOnCanvas(self, buttonClicked, window, finalView):
         if not finalView: self.propsData.savedButtonChoices[self.currentPage-1]=buttonClicked
         self.configController.updatePartIndexValues(self.propsData)
@@ -113,6 +121,8 @@ class ViewController(object):
         if buttonClicked != 4: window[keyDic[buttonClicked+12]].update('ressources/tick.png')
 
 
+    # Etwas redundant, ginge sicher schöner, aber ich hab dann etwas Chaos mit den Reihenfolgen gemacht. :-)
+    # Wäre ne erste Maßnahme fürs refactoring, aber das spar ich mir mal weils keine Produktivumgebung wird...
     def updateComponentsInFinalView(self, window, keyDict):
         self.finalNotebookData.adjustIndexValues()
         finalComponentList = self.finalNotebookData.createConfigArray()
