@@ -14,7 +14,7 @@ class UserSelectionView():
         buttonPrevious = gui.Button('PREVOUS', image_data=imageData.buttonPrevious, size=(14,1.0), key='buttonPrevious', button_color=('white', '#66bb6a'), pad=([80,40],[0,0]))
         buttonNext = gui.Button('NEXT', image_data=imageData.buttonNoPreference, size=(14,1.0), key='buttonNext', button_color=('white', '#66bb6a'))
         buttonConfirm = gui.Button('DONE', image_data=imageData.buttonDone, button_type=BUTTON_TYPE_CLOSES_WIN, size=(14,1.0), key='btnConfirmAndFinish', button_color=('white', '#66bb6a'))
-        buttonOne = gui.Button('', image_data=imageData.buttonUsedForOne, key='buttonOne', button_color=('white', '#66bb6a'), pad=([81,26],[0,0]))
+        buttonOne = gui.Button('', tooltip="Auswirkungen:\nRechenleistung --\nPreis -\nGrafikleistung++", image_data=imageData.buttonUsedForOne, key='buttonOne', button_color=('white', '#66bb6a'), pad=([81,26],[0,0]))
         buttonTwo = gui.Button('', image_data=imageData.buttonUsedForTwo, key='buttonTwo', button_color=('white', '#66bb6a'), pad=([0,26],[0,0]))
         buttonThree = gui.Button('', image_data=imageData.buttonUsedForThree, key='buttonThree', button_color=('white', '#66bb6a'))
         infoTextButtonOne =   gui.Text('                                                                                                     \n \n \n \n \n \n', font='Consolas 8', background_color='#eef5ef', text_color='black', key='textInfoButtonOne', pad=([81,0],[15,20]))
