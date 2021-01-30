@@ -13,5 +13,6 @@ except:
     'PySimpleGUI        <pip install PySimpleGUI>\n'+
     'Plotly Express     <pip install plotly-express>\n'+
     'Kaleido            <pip install kaleido>\n'+
+    'tkinter            <pip install --->\n'+
     'Pandas             <pip install pandas>')
 

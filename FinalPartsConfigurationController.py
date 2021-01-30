@@ -52,6 +52,7 @@ class FinalPartsConfigurationController:
     
     '''Anpassung der Indexwerte um ein letztes mal den Plot zu aktualisieren und unplausible Kombinationen zu vermeiden'''
     def adjustIndexValues(self):
+        self.indexValues[1] = self.adjustPriceThree()
         # Sind bei der Auswahl hohe Werte bei GPU und CPU Leistung herausgekommen, wird analog zu 
         # den zusätzlichen Lüftern in der Konfiguration der Indexwert der Lautstärkeentwicklung erhöht
         if 4 <= self.indexValues[7] <= 6: self.indexValues[3]+=1
@@ -61,59 +62,53 @@ class FinalPartsConfigurationController:
         # wenn Outdoor/Special gewählt wurde und der Akkuindexwert sehr niedrig ist, den Indexwert der Akkuleistung nach oben anpassen
         if AvailableOptionsModel.getFinalConfigState()[5]=='Outdoor/Special' and self.indexValues[6] < 3: self.indexValues[6]+=2
 
-        self.indexValues[1] = self.adjustPriceTwo()
 
-    
-    def adjustPrice(self):
-        price = 0
-        for i in range(8):
-            if i not in (1,2,3):
-                price += self.indexValues[i]
-                print('{}{}'.format('price raised to', price))
-            elif i != 1: 
-                price -= self.indexValues[i]
-                print('{}{}'.format('price reduced to', price))
-        if price != 0: price = round(price/5, 0)
-        else: price = 0
+    def adjustPriceThree(self):
+            priceOption = AvailableOptionsModel.getFinalConfigState()[1]
+            print('{}{}'.format('price Option', priceOption))
 
-        # abfangen, dass das Ergebnis plus Preis nicht kleiner als 1 ist
-        print('{}{}'.format('at index:', self.indexValues[1]))
+            price = 0
+            for i in range(8):
+                if i == 0:
+                    price += (self.indexValues[i]-4)*2
+                    print('{}{}'.format('Position', i))
+                    print('{}{}'.format('price raised to', price))
+                    print('{}{}'.format('for', self.indexValues[i]))
+                elif i in (2,3): 
+                    price += (4-self.indexValues[i])/1.5
+                    print('{}{}'.format('Position', i))
+                    print('{}{}'.format('price reduced to', price))
+                    print('{}{}'.format('for', self.indexValues[i]))
+                elif i in (4,5,6): 
+                    price += (self.indexValues[i]-4)
+                    print('{}{}'.format('Position', i))
+                    print('{}{}'.format('price reduced to', price))
+                    print('{}{}'.format('for', self.indexValues[i]))
+                elif i == 7:
+                    price += (self.indexValues[i]-4)*1.5
+                    print('{}{}'.format('Position', i))
+                    print('{}{}'.format('price reduced to', price))
+                    print('{}{}'.format('for', self.indexValues[i]))
+            price = round(price, 0)
 
-        if price + self.indexValues[1] < 1: return 1
-        else: return price + self.indexValues[1]  
+            print('{}{}'.format('Price:', price))
 
+            if priceOption == 'niedrig': price+=1
+            elif priceOption == 'mittel': price-=1
+            elif priceOption == 'hoch': price-=2
 
-    def adjustPriceTwo(self):
-        priceOption = AvailableOptionsModel.getFinalConfigState()[1]
-        priceUp = 0
-        priceDown = 0
-        finalAdjustmentCalc = 0
-        for i in range(8):
-            if i not in (1,2,3):
-                priceUp += self.indexValues[i]
-                print('{}{}'.format('price raised to', priceUp))
-            elif i != 1: 
-                priceDown += self.indexValues[i]
-                print('{}{}'.format('price reduced to', priceDown))
-        priceUp = round(priceUp/5, 0)
-        priceDown = round(priceDown/3, 0)
+            print('{}{}'.format('final PriceChange:', price))
+            print('{}{}'.format('actual Price:', self.indexValues[1]))
 
-        print('{}{}'.format('PriceChange:', priceUp-priceDown))
+            #Preis irgendwie vergleichen/Faktor? Also Ergebnis müsste eigentlich dem aktuellen Preis entsprechen?
 
-        finalAdjustmentCalc = priceUp-priceDown
-        if priceOption == 'niedrig': finalAdjustmentCalc+=1
-        elif priceOption == 'mittel': finalAdjustmentCalc-=1
-        elif priceOption == 'hoch': finalAdjustmentCalc-=2
-
-        print('{}{}'.format('final PriceChange:', finalAdjustmentCalc))
-        print('{}{}'.format('actual Price:', self.indexValues[1]))
-
-        #Preis irgendwie vergleichen/Faktor? Also Ergebnis müsste eigentlich dem aktuellen Preis entsprechen?
+            if price <= -10: return 1
+            elif price <= -5: return 2
+            elif price <= 0: return 3
+            else: return round((price+self.indexValues[1])/2, 0)
 
 
-        if finalAdjustmentCalc+self.indexValues[1]<1: return 1
-        else: return finalAdjustmentCalc+self.indexValues[1]
-    
-    # Liste Reihenfolge ['Rechenleistung', 'Preis', 'Gewicht', 'Lautstärke', 'Robustheit', 'Speicher', 'Akku', 'Grafikleistung']    
+
+        # Liste Reihenfolge ['Rechenleistung', 'Preis', 'Gewicht', 'Lautstärke', 'Robustheit', 'Speicher', 'Akku', 'Grafikleistung']    
 
 

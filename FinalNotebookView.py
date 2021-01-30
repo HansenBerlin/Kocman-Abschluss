@@ -8,16 +8,6 @@ class FinalNotebookView():
     def initMainWindow(exitProgram):
         if exitProgram: return -1
 
-        imageData = ImageData() 
-        viewController = ViewController()
-       
-        buttonConfirm = gui.Button('FERTIG', image_data=imageData.buttonConfirmPurchase, pad=([74,0],[10,0]), size=(1,1), key='btnConfirmAndFinish', button_color=('white', '#66bb6a'))
-        infoTextRowNamesUserSelection = gui.Text('Anwendung/Leistung \nPreis \nGewicht und Größe \nAkkulaufzeit \nLautstärke \nRobustheit \n',font='Consolas 10', background_color='#eef5ef', text_color='black', pad=([80,0],[0,0]))
-        infoTextCurrentUserSelection =   gui.Text('                                                                                          \n \n \n \n \n \n', font='Consolas 10', background_color='#eef5ef', text_color='black', key='textRightColumnInfoFinalSelection', pad=([20,0],[0,0]))
-        headingLeftColumn = gui.Text('Ihre optimale Konfiguration', background_color='#252525', text_color='white', border_width=15, size=(45,1), justification='center', key='headingLeftColumn', pad=([81,0],[35,25]))
-        headingRightColumn = gui.Text('Leistungsindex', text_color='white', background_color='#252525', border_width=15, size=(33,1), justification='center', pad=([81,0],[35,25]))
-        plotCanvas = gui.Image(key='plotCanvas', pad=([0,0],[20,0]), size=(500,400), background_color='#eef5ef', filename='ressources/radarplotUserSelection.png')    
-
         fileNameImageDict= {
                         0: 'ressources/parts (1).png',
                         1: 'ressources/parts (7).png',
@@ -54,6 +44,15 @@ class FinalNotebookView():
                         8: 'keyPreis'
         }
 
+        imageData = ImageData() 
+        viewController = ViewController()
+       
+        buttonConfirm = gui.Button('FERTIG', image_data=imageData.buttonConfirmPurchase, pad=([74,0],[10,0]), size=(1,1), key='btnConfirmAndFinish', button_color=('white', '#66bb6a'))
+        infoTextRowNamesUserSelection = gui.Text('Anwendung/Leistung \nPreis \nGewicht und Größe \nAkkulaufzeit \nLautstärke \nRobustheit \n',font='Consolas 10', background_color='#eef5ef', text_color='black', pad=([80,0],[0,0]))
+        infoTextCurrentUserSelection =   gui.Text('                                                                                          \n \n \n \n \n \n', font='Consolas 10', background_color='#eef5ef', text_color='black', key='textRightColumnInfoFinalSelection', pad=([20,0],[0,0]))
+        headingLeftColumn = gui.Text('Ihre optimale Konfiguration', background_color='#252525', text_color='white', border_width=15, size=(45,1), justification='center', key='headingLeftColumn', pad=([81,0],[35,25]))
+        headingRightColumn = gui.Text('Leistungsindex', text_color='white', background_color='#252525', border_width=15, size=(33,1), justification='center', pad=([81,0],[35,25]))
+        plotCanvas = gui.Image(key='plotCanvas', pad=([0,0],[20,0]), size=(500,400), background_color='#eef5ef', filename='ressources/radarplotUserSelection.png')      
 
         colLeft = []      
         for i in range(9): colLeft.append([gui.Image(pad=([80,0],[4,4]), size=(32,32), background_color='#eef5ef', filename=fileNameImageDict[i])])
@@ -81,14 +80,14 @@ class FinalNotebookView():
                 use_default_focus=False, icon=imageData.iconMainWindow, font='Consolas', finalize=True)
         
         viewController.updateComponentsInFinalView(window, infoTextKeysDict)
-        
 
         while True:            
             event, values = window.read()
 
             if event == gui.WIN_CLOSED or event == 'Exit':
                 break
-            elif event == 'buttonOne':
-                buttonPressed = 1  
+            elif event == 'btnConfirmAndFinish':
+                gui.ProgressBar('Title', 0, 100, '_M_', 'This is my meter that will go to 100')
+
 
         window.close()

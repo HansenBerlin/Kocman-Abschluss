@@ -41,7 +41,6 @@ class CombineOptionsController(object):
 
             elif i == 3:
                 if selection == 1:
-                    propsData.noiseEmission[3][2] = True
                     propsData.durability[3][2] = True          
                 elif selection == 2:
                     propsData.batteryLife[3][2] = True
