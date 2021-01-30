@@ -50,10 +50,10 @@ class ViewController(object):
 
     def updatePageAndElementsOnPreviousButtonClick(self, buttonClicked, window):  
         self.mainController.updateAvailableOptions(self.propsData, buttonClicked, self.currentPage)
-        self.updatePlotOnCanvas(buttonClicked, window, False) 
+        self.updatePlotOnCanvas(buttonClicked, window, False)
+        self.updateRightColumnElements(4, window)
         self.currentPage-=1
         self.updateLeftColumnElements(window)
-        self.updateRightColumnElements(4, window)  
 
 
     def updateButtonValues(self, button, returnTextValue, returnHeaderValue):

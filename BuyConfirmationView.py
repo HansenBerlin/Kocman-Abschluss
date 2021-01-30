@@ -8,14 +8,14 @@ imageData = ImageData()
 
 def createView(indexPoints, price, lastWindow):
     lastWindow.close()
-    buttonConfirm = gui.Button('', image_data=imageData.buttonCloseWindow, pad=([165,10],[20,40]), button_type=BUTTON_TYPE_CLOSES_WIN, size=(14,1), key='btnConfirmAndFinish', button_color=('white', '#66bb6a'))
-    
 
-    layout = [[gui.Text('', key='indexValue', pad=([175,30],[40,1]), font='Consolas', size=(20,2), justification='center')],
+    buttonConfirm = gui.Button('', image_data=imageData.buttonCloseWindow, pad=([165,10],[20,40]), button_type=BUTTON_TYPE_CLOSES_WIN, size=(14,1), key='btnConfirmAndFinish', button_color=('white', '#66bb6a'))
+    layout = [[gui.Text('', key='indexValue', pad=([175,30],[40,1]), background_color='#eef5ef', font='Consolas', size=(20,2), justification='center')],
                 [gui.ProgressBar(100, orientation='h', size=(40, 30), key='progressbar', pad=(40,10))],
-                [gui.Text('{}:\n{}€'.format('Preis', price), pad=([175,10],[10,1]), font='Consolas', size=(20,2), justification='center')],
-                [gui.Text('{}€\n{}'.format(round(price/indexPoints, 2), 'pro Leistungspunkt'), pad=([175,10],[10,1]), font='Consolas', size=(20,2), justification='center')],
-                [buttonConfirm]]
+                [gui.Text('{}:\n{}€'.format('Preis', price), pad=([175,10],[10,1]), background_color='#eef5ef', font='Consolas', size=(20,2), justification='center')],
+                [gui.Text('{}€\n{}'.format(round(price/indexPoints, 2), 'pro Leistungspunkt'), pad=([175,10],[10,1]), background_color='#eef5ef', font='Consolas', size=(20,2), justification='center')],
+                [buttonConfirm],
+                [gui.Image(filename='ressources/computerguy.png')]]
 
     window = gui.Window('VIELEN DANK').Layout(layout)
     progress_bar = window.FindElement('progressbar')

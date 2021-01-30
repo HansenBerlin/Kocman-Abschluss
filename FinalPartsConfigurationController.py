@@ -112,14 +112,20 @@ class FinalPartsConfigurationController:
         indexValue = 0
         for i in range(8):
             if i == 0:
-                indexValue += self.indexValues[i]*2.3              
+                indexValue += (self.indexValues[i])-1*2.3   
+                if self.indexValues[i]==8: indexValue+=15    
             elif i in (2,3): 
-                indexValue += 8-self.indexValues[i]                   
+                indexValue += 8-self.indexValues[i]      
+                if self.indexValues[i]==1: indexValue+=2          
             elif i == 4:
-                indexValue += self.indexValues[i]  
+                indexValue += self.indexValues[i]-1  
+                if self.indexValues[i]==8: indexValue+=5
             elif i in (5,6): 
-                indexValue += self.indexValues[i]*1.2                   
+                indexValue += (self.indexValues[i]-1)*1.2   
+                if self.indexValues[i]==8: indexValue+=5               
             elif i == 7:
-                indexValue += self.indexValues[i]*1.5
-        return (int(round(indexValue, 0))-1)*2
+                indexValue += (self.indexValues[i]-1)*1.5
+                if self.indexValues[i]==8: indexValue+=10          
+
+        return int(round(indexValue*1.818, 0))
 
