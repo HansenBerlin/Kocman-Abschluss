@@ -1,5 +1,5 @@
 from FinalPartsConfigurationController import FinalPartsConfigurationController
-from RadarChartBuilder import RadarChartBuilder
+from RadarChartBuilderController import RadarChartBuilderController
 from ConfigurationController import ConfigurationController
 from AvailableOptionsModel import AvailableOptionsModel
 from CombineOptionsController import CombineOptionsController
@@ -36,7 +36,7 @@ class ViewController(object):
         self.propsData = AvailableOptionsModel()
         self.mainController = CombineOptionsController(self.propsData) 
         self.configController = ConfigurationController()
-        self.plotBuilder = RadarChartBuilder()
+        self.plotBuilder = RadarChartBuilderController()
         self.finalNotebookData = FinalPartsConfigurationController()
 
     # Diese und die nächste Funktion ähneln sich und werden durch Klick auf den weiter oder Zurückbutton

@@ -12,7 +12,7 @@ cD = {
         8: 'rgb(102, 187, 106)'        
         }
 
-class RadarChartBuilder(object):
+class RadarChartBuilderController(object):
 
     def __init__(self):
         self.categories = ['Rechenleistung', 'Preis', 'Gewicht', 'Lautstärke', 'Robustheit', 'Speicher', 'Akku', 'Grafikleistung']   

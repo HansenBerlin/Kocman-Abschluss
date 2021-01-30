@@ -51,7 +51,7 @@ class FinalPartsConfigurationController:
     
     '''Anpassung der Indexwerte um ein letztes mal den Plot zu aktualisieren und unplausible Kombinationen zu vermeiden'''
     def adjustIndexValues(self):
-        self.indexValues[1] = self.adjustPriceThree()
+        self.indexValues[1] = self.adjustPrice()
         # Sind bei der Auswahl hohe Werte bei GPU und CPU Leistung herausgekommen, wird analog zu 
         # den zusätzlichen Lüftern in der Konfiguration der Indexwert der Lautstärkeentwicklung erhöht
         if 4 <= self.indexValues[7] <= 6: self.indexValues[3]+=1
@@ -67,11 +67,10 @@ class FinalPartsConfigurationController:
     dann ggfs nach oben oder unten anzupassen. Wurde bei Preis etwas ausgewählt, wird dies hier mit bereinigt'''
 
     # Liste Reihenfolge ['Rechenleistung', 'Preis', 'Gewicht', 'Lautstärke', 'Robustheit', 'Speicher', 'Akku', 'Grafikleistung'] 
-    def adjustPriceThree(self):
+    def adjustPrice(self):
             priceOption = AvailableOptionsModel.getFinalConfigState()[1]
-            print('{}{}'.format('price Option', priceOption))
-
             price = 0
+            
             for i in range(8):
                 if i == 0:
                     price += (self.indexValues[i]-4)*2                   
@@ -97,7 +96,7 @@ class FinalPartsConfigurationController:
     '''Die Benchmarkwerte für das letzte Fenster werden aus den Indexwerten mit unterschiedlichen Gewichtungen errechnet
     und auf 100 hochgerechnet (weil der Maximalwert bei 54 liegt und somit als Referenz dient). Extremwerte im Highendbereich 
     werden mit Bonuspunkten belohnt'''
-    def calculateFinalIndexValue(self):
+    def calculateFinalBenchmark(self):
         indexValue = 0
         for i in range(8):
             if i == 0:

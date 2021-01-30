@@ -87,6 +87,6 @@ def initMainWindow(exitProgram, lastWindow):
         if event == gui.WIN_CLOSED or event == 'Exit':
             break
         elif event == 'btnConfirmAndFinish':
-            confirmView.createView(indexData.calculateFinalIndexValue(), indexData.createConfigArray()[1], window)                    
+            confirmView.createView(indexData.calculateFinalBenchmark(), indexData.createConfigArray()[1], window)                    
             
     window.close()

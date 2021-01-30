@@ -12,9 +12,11 @@ def install(package):
 dependencies = ['PySimpleGUI', 'plotly-express', 'kaleido', 'pandas']
 
 
-userInput = input('Y und ENTER drücken um Abhängigkeiten zu installieren.\n'+
-                'ENTER drücken zum überspringen\n')
-if userInput == 'y' or 'Y':
+userInput = input('++++++++++++++++++++++++++++++++++++++++++++++++++++\n'+
+                'Möchtest du notwendige Abhängigkeiten installieren?\n'+
+                'ENTER drücken zum überspringen\n'+
+                'y und mit ENTER bestätigen zum installieren')
+if userInput == 'y':
     try: 
         for i in dependencies:
             install(i)

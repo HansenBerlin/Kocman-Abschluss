@@ -13,11 +13,12 @@ class UserSelectionView():
 
         viewController = ViewController()
         imageData = ImageData() 
+        buttonPressed = 4
 
         buttonPrevious = gui.Button('PREVOUS', image_data=imageData.buttonPrevious, size=(14,1.0), key='buttonPrevious', button_color=('white', '#66bb6a'), pad=([80,40],[0,0]))
         buttonNext = gui.Button('NEXT', image_data=imageData.buttonNoPreference, size=(14,1.0), key='buttonNext', button_color=('white', '#66bb6a'))
         buttonConfirm = gui.Button('DONE', image_data=imageData.buttonDone, button_type=BUTTON_TYPE_CLOSES_WIN, size=(14,1.0), key='btnConfirmAndFinish', button_color=('white', '#66bb6a'))
-        buttonOne = gui.Button('', tooltip="Auswirkungen:\nRechnenleistung--\nPreis", image_data=imageData.buttonUsedForOne, key='buttonOne', button_color=('white', '#66bb6a'), pad=([81,26],[0,0]))
+        buttonOne = gui.Button('', image_data=imageData.buttonUsedForOne, key='buttonOne', button_color=('white', '#66bb6a'), pad=([81,26],[0,0]))
         buttonTwo = gui.Button('', image_data=imageData.buttonUsedForTwo, key='buttonTwo', button_color=('white', '#66bb6a'), pad=([0,26],[0,0]))
         buttonThree = gui.Button('', image_data=imageData.buttonUsedForThree, key='buttonThree', button_color=('white', '#66bb6a'))
         infoTextButtonOne =   gui.Text('                                                                                                     \n \n \n \n \n \n', font='Consolas 8', background_color='#eef5ef', text_color='black', key='textInfoButtonOne', pad=([81,0],[15,20]))
@@ -32,10 +33,6 @@ class UserSelectionView():
         confirmSelectionImageTwo = gui.Image(key='confirmationSelectionTwo', filename='ressources/placeholderTick.png', pad=([40,0],[0,80]), size=(25,25), background_color='#eef5ef')
         confirmSelectionImageThree = gui.Image(key='confirmationSelectionThree', filename='ressources/placeholderTick.png', pad=([40,0],[0,80]), size=(25,25), background_color='#eef5ef')
 
-
-        buttonPressed = 4
-
-        #evtl in window/layout rein
         gui.SetOptions(background_color='#eef5ef',      
                use_ttk_buttons=True,
                button_color=('white', '#66bb6a'),
@@ -50,7 +47,6 @@ class UserSelectionView():
         window = gui.Window('Notebook-Builder for Noobs', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, use_default_focus=False, icon=imageData.iconMainWindow, font='Consolas', finalize=True)
         window.hide()
 
-        #initialize, später löschen
         viewController.updatePageAndElementsOnNextButtonClick(4, window)   
         viewController.checkPrevAndNextButtonStates(4, window)      
         window.un_hide()    
