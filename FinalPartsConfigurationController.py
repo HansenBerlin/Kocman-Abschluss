@@ -63,6 +63,7 @@ class FinalPartsConfigurationController:
         if AvailableOptionsModel.getFinalConfigState()[5]=='Outdoor/Special' and self.indexValues[6] < 3: self.indexValues[6]+=2
 
 
+    # Liste Reihenfolge ['Rechenleistung', 'Preis', 'Gewicht', 'Lautstärke', 'Robustheit', 'Speicher', 'Akku', 'Grafikleistung'] 
     def adjustPriceThree(self):
             priceOption = AvailableOptionsModel.getFinalConfigState()[1]
             print('{}{}'.format('price Option', priceOption))
@@ -100,15 +101,25 @@ class FinalPartsConfigurationController:
             print('{}{}'.format('final PriceChange:', price))
             print('{}{}'.format('actual Price:', self.indexValues[1]))
 
-            #Preis irgendwie vergleichen/Faktor? Also Ergebnis müsste eigentlich dem aktuellen Preis entsprechen?
 
             if price <= -10: return 1
             elif price <= -5: return 2
             elif price <= 0: return 3
             else: return round((price+self.indexValues[1])/2, 0)
+            
 
-
-
-        # Liste Reihenfolge ['Rechenleistung', 'Preis', 'Gewicht', 'Lautstärke', 'Robustheit', 'Speicher', 'Akku', 'Grafikleistung']    
-
+    def calculateFinalIndexValue(self):
+        indexValue = 0
+        for i in range(8):
+            if i == 0:
+                indexValue += self.indexValues[i]*2.3              
+            elif i in (2,3): 
+                indexValue += 8-self.indexValues[i]                   
+            elif i == 4:
+                indexValue += self.indexValues[i]  
+            elif i in (5,6): 
+                indexValue += self.indexValues[i]*1.2                   
+            elif i == 7:
+                indexValue += self.indexValues[i]*1.5
+        return (int(round(indexValue, 0))-1)*2
 

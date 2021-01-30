@@ -3,6 +3,7 @@ from UserSelectionView import UserSelectionView
 '''Programmaufbau siehe beiliegende Dokumentation, die wichtigsten 
 Funktionen sind zusätzlich im Code dokumentiert
 Repo: https://github.com/HansenBerlin/Kocman-Abschluss'''
+UserSelectionView.initMainWindow()
 
 try: 
     UserSelectionView.initMainWindow()
