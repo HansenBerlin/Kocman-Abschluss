@@ -20,14 +20,20 @@ if userInput == 'y':
     try: 
         for i in dependencies:
             install(i)
-    except: 
+    except Exception as e: 
         print('Das Programm konnte nicht geladen werden, wahrscheinlich fehlen Abhängigkeiten.\n' +
         'Diese sollten eigentlich über dieses Programm installiert werden, das hat nicht geklappt :-(\n'+
-        'Folgende Bibliotheken müssen manuell installiert werden (mit Befehl zur Installation via PowerShell:\n'+
+        'Folgende Bibliotheken müssen manuell installiert werden (mit Befehl zur Installation via PowerShell:\n\n'+
         'PySimpleGUI        <pip install PySimpleGUI>\n'+
         'Plotly Express     <pip install plotly-express>\n'+
         'Kaleido            <pip install kaleido>\n'+
-        'Pandas             <pip install pandas>')
+        'Pandas             <pip install pandas>\n'+
+        'PsUtil             <pip install psutil>\n\n'+
+        'Wenn auch das nicht klappt bei der manuellen Installation --user als Flag hinter den Befehl setzen')
+
+        print('++++++++++++++++++++++++++++++++++++++++++++')
+        print('Fehlermeldung:')
+        print(e)
 
 try:
     print('Starte Hauptprogramm...')
