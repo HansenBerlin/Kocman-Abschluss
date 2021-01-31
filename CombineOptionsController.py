@@ -27,7 +27,6 @@ class CombineOptionsController(object):
                     propsData.batteryLife[3][2] = True
                     propsData.noiseEmission[3][1] = True
                     propsData.noiseEmission[3][2] = True
-                    propsData.durability[3][2] = True                    
                 elif selection == 3: 
                     propsData.price[3][0] = True
 
@@ -39,15 +38,12 @@ class CombineOptionsController(object):
                     propsData.durability[3][2] = True
                 elif selection == 2 :                
                     propsData.durability[3][2] = True                
-                elif selection == 3: 
-                    propsData.price[3][0] = True
-
+                
             elif i == 3:
                 if selection == 1:
                     propsData.durability[3][2] = True          
                 elif selection == 2:
                     propsData.batteryLife[3][2] = True
-                    propsData.durability[3][2] = True 
                 elif selection == 3:
                     propsData.batteryLife[3][1] = True
                     propsData.batteryLife[3][2] = True
@@ -59,6 +55,6 @@ class CombineOptionsController(object):
 
             elif i == 5:    
                 if selection == 3:
-                    propsData.durability[3][2] = True  
+                    propsData.durability[3][1] = True  
         
 
