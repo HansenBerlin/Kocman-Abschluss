@@ -1,4 +1,3 @@
-from UserSelectionView import UserSelectionView
 import subprocess
 import sys
 
@@ -7,13 +6,14 @@ Funktionen sind zusätzlich im Code dokumentiert
 Repo: https://github.com/HansenBerlin/Kocman-Abschluss'''
 
 def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package, '--user'])
 
-dependencies = ['PySimpleGUI', 'plotly-express', 'kaleido', 'pandas']
+dependencies = ['PySimpleGUI', 'plotly-express', 'kaleido', 'pandas', 'psutil']
 
 
 userInput = input('++++++++++++++++++++++++++++++++++++++++++++++++++++\n'+
                 'Möchtest du notwendige Abhängigkeiten installieren?\n'+
+                '(das kann ein paar Minuten dauern...)\n'+
                 'ENTER drücken zum überspringen\n'+
                 'y und mit ENTER bestätigen zum installieren')
 if userInput == 'y':
@@ -31,6 +31,7 @@ if userInput == 'y':
 
 try:
     print('Starte Hauptprogramm...')
+    from UserSelectionView import UserSelectionView
     UserSelectionView.initMainWindow()
 except Exception as e:
     print(e)
