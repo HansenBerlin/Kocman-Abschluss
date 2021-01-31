@@ -29,7 +29,8 @@ if userInput == 'y':
         'Kaleido            <pip install kaleido>\n'+
         'Pandas             <pip install pandas>\n'+
         'PsUtil             <pip install psutil>\n\n'+
-        'Wenn auch das nicht klappt bei der manuellen Installation --user als Flag hinter den Befehl setzen')
+        'Wenn auch das nicht klappt bei der manuellen Installation --user als Flag hinter den Befehl setzen.\n'+
+        'Und wenn auch das nicht klappt die Powershell oder cmd mal als Admin starten.')
 
         print('++++++++++++++++++++++++++++++++++++++++++++')
         print('Fehlermeldung:')
