@@ -78,7 +78,7 @@ def initMainWindow(exitProgram, lastWindow):
 
     rightColumn = [[gui.Column([[headingRightColumn],[infoTextRowNamesUserSelection, infoTextCurrentUserSelection],[plotCanvas]])]]
     layout = [[gui.Column(leftColumn, size=(600, 700)), gui.VerticalSeparator(), gui.Column(rightColumn, size=(500, 700))]]
-    window = gui.Window('Notebook-Builder for Noobs', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, 
+    window = gui.Window('nifty n00b notebook-builder', layout, margins=(0,0), element_padding=(0,0), no_titlebar=False, grab_anywhere=False, 
             use_default_focus=False, icon=imageData.iconMainWindow, font='Consolas', finalize=True)
     
     viewController.updateComponentsInFinalView(window, infoTextKeysDict)
